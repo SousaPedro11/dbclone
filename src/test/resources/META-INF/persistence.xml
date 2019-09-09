@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<persistence
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence 
+	http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+	version="2.1">
+
+	<persistence-unit
+		name="unidade_conexao_teste_dbclone"
+		transaction-type="RESOURCE_LOCAL">
+
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+		<!-- Classes -->
+
+		<exclude-unlisted-classes>false</exclude-unlisted-classes>
+		<shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
+
+		<properties>
+			<!-- JPA -->
+			<property
+				name="eclipselink.cache.shared.default"
+				value="false" />
+			<property
+				name="javax.persistence.schema-generation.database.action"
+				value="none" />
+			<property
+				name="javax.persistence.schema-generation.create-source"
+				value="script-then-metadata" />
+			<property
+				name="javax.persistence.schema-generation.create-script-source"
+				value="sql/create_ddl_teste.sql" />
+<!-- 			<property
+				name="javax.persistence.jdbc.driver"
+				value="org.h2.Driver" />
+			<property
+				name="javax.persistence.jdbc.user"
+				value="lisboa" />
+			<property
+				name="javax.persistence.jdbc.password"
+				value="123456" />
+			<property
+				name="javax.persistence.jdbc.url"
+				value="jdbc:h2:~/meuBancoH2/bancoDados" /> -->
+			<property
+				name="javax.persistence.jdbc.driver"
+				value="org.postgresql.Driver" />
+			<property
+				name="javax.persistence.jdbc.password"
+				value="iec_desenv" />
+			<property
+				name="javax.persistence.jdbc.url"
+				value="jdbc:postgresql://localhost:5432/dev_siec_2_5" />
+			<!-- <property name="javax.persistence.jdbc.user" value="lisboaMemoria" 
+				/> <property name="javax.persistence.jdbc.password" value="senhaNova" /> 
+				<property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:bancoDadosTeste" 
+				/> -->
+			<!-- <property name="javax.persistence.validation.mode" value="AUTO" /> -->
+
+			<!-- HIBERNATE -->
+			<property
+				name="hibernate.show_sql"
+				value="false" />
+			<property
+				name="hibernate.format_sql"
+				value="true" />
+			<property
+				name="hibernate.use_sql_comments"
+				value="true" />
+			<property
+				name="hibernate.generate_statistics"
+				value="false" />
+			<property
+				name="hibernate.dialect"
+				value="org.hibernate.dialect.PostgreSQLDialect" />
+			<property name="javax.persistence.jdbc.user" value="iec_desenv"/>
+<!-- 			<property
+				name="hibernate.dialect"
+				value="org.hibernate.dialect.H2Dialect" /> -->
+
+			<!-- Envers listeners -->
+
+			<!-- <property name="org.hibernate.envers.default_schema" value="prancheta" 
+				/> -->
+		</properties>
+
+	</persistence-unit>
+</persistence>

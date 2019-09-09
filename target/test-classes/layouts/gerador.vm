@@ -1,0 +1,35 @@
+## Obtem Schemas
+#set ($schemas = $catalog.getSchemas())
+#***##foreach($schema in $schemas)
+#**	*##if((!$catalog.getTables($schema).isEmpty())&&(!$schema.getName().contains("COPY")))
+###**		*#CREATE SCHEMA IF NOT EXISTS #**$schema.getCatalogName()COPY.*#$schema.getName()COPY;
+#**		*#CREATE SCHEMA IF NOT EXISTS $schema.getName();
+## Obtem Tabelas
+#**		*##foreach($table in $catalog.getTables($schema))
+###**			*#CREATE TABLE IF NOT EXISTS $schema.getName()COPY.$table.getName()(
+#**			*#CREATE TABLE IF NOT EXISTS $schema.getName().$table.getName()(
+## Obtem Colunas
+#**			*##foreach($coluna in $table.getColumns())
+#**				*#$coluna.getName() $coluna.getColumnDataType()#if($coluna.getColumnDataType() == "VARCHAR"||$coluna.getColumnDataType() == "varchar") ($coluna.getSize())#end#if($coluna.isAutoIncremented()) AUTO_INCREMENT#end#if(!$coluna.isNullable()) NOT NULL#end#if( $foreach.hasNext ),
+#**				*##else
+#**				*#
+#**				*##end
+#**			*##end
+#**		*#);
+##Primary key: $table.hasPrimaryKey()
+#**		*#
+#**		*##end
+#**	*##end
+#***##end
+## Gerar PK
+#***##foreach($schema in $schemas)
+#**	*##if((!$catalog.getTables($schema).isEmpty())&&(!$schema.getName().contains("COPY")))
+## Obtem Tabelas
+#**		*##foreach($table in $catalog.getTables($schema))
+#**			*##if($table.hasPrimaryKey())
+###**				*#ALTER TABLE $schema.getName()COPY.$table.getName() ADD PRIMARY KEY ($table.getPrimaryKey().getColumns().get(0).getName());
+#**				*#ALTER TABLE $schema.getName().$table.getName() ADD PRIMARY KEY ($table.getPrimaryKey().getColumns().get(0).getName());
+#**			*##end
+#**		*##end
+#**	*##end
+#***##end

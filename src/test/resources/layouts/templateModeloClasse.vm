@@ -1,0 +1,46 @@
+## pacote (precisa do schema)
+#***#package $classe.getPacote().getNomeCompleto();
+
+## imports (precisa lista annotations)
+#***##foreach($import in $classe.getImports())
+#** *#import $import
+#***##end
+
+## inicio classe (precisa tabela)
+$classe.getAnotacoes()
+#***#public class $classe.getNome() {
+
+## relacionamentos
+#***##foreach($relacionamento in $relacionamentos)
+#** *#    //$relacionamento
+#***##end
+
+## atributos (precisa lista colunas)
+#***##foreach($atributo in $classe.getAtributos())
+#** *##foreach($anotacao in $atributo.getAnotacoes())
+#**  *#	$anotacao
+#** *##end
+#** *#	private $atributo.getTipo() $atributo.getNome();
+
+#***##end
+##
+##	Construtor (precisa tabela)
+#***#	public $classe.getNome()() {
+
+#***#	}
+
+##	Getters e Setters (precisa lista colunas)
+#***##foreach($atributo in $classe.getAtributos())
+#** *#	public $atributo.getTipo() $atributo.getter()() {
+#** *#
+#** *#		return this.$atributo.getNome();
+#** *#	}
+
+#** *#	public void $atributo.setter()(final $atributo.getTipo() $atributo.getNome()) {
+#** *#
+#** *#		this.$atributo.getNome() = $atributo.getNome();
+#** *#	}
+
+#***##end
+## fim classe
+#***#}

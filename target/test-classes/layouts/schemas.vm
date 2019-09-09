@@ -1,0 +1,12 @@
+#***##foreach($schema in $catalog.getSchemas())
+#**	*##if(!$catalog.getTables($schema).isEmpty())
+#**		*#Schema: $schema.getName()
+#**		*##foreach($tabela in $catalog.getTables($schema))
+#**			*#Tabela: $tabela.getName()
+#**			*##foreach($coluna in $tabela.getColumns())
+#**				*#Nome: $coluna.getName()#if($coluna.isPartOfPrimaryKey())(PK)#end	Tipo: $coluna.getColumnDataType()	Tamanho: $coluna.getSize()
+#**			*##end
+#**		*#
+#**		*##end
+#**	*##end
+#***##end
