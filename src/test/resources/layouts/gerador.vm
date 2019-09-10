@@ -28,8 +28,19 @@
 #**		*##foreach($table in $catalog.getTables($schema))
 #**			*##if($table.hasPrimaryKey())
 ###**				*#ALTER TABLE $schema.getName()COPY.$table.getName() ADD PRIMARY KEY ($table.getPrimaryKey().getColumns().get(0).getName());
-#**				*#ALTER TABLE $schema.getName().$table.getName() ADD PRIMARY KEY ($table.getPrimaryKey().getColumns().get(0).getName());
+#**				*#ALTER TABLE $schema.getName().$table.getName()
+#**             *#ADD CONSTRAINT $table.getName()_pkey PRIMARY KEY ($table.getPrimaryKey().getColumns().get(0).getName());
 #**			*##end
 #**		*##end
 #**	*##end
+#***##end
+
+## Gerar FK
+#***##foreach($ref in $mapaFKs.keySet())
+ALTER TABLE $mapaFKs.get($ref).getForeignKeyColumn().getParent()
+ADD CONSTRAINT $ref FOREIGN KEY ($mapaFKs.get($ref).getForeignKeyColumn().getName())
+REFERENCES $mapaFKs.get($ref).getPrimaryKeyColumn().getParent() ($mapaFKs.get($ref).getPrimaryKeyColumn().getName())
+ON UPDATE no action
+ON DELETE no action
+;
 #***##end

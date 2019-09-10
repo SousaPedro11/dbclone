@@ -1,6 +1,11 @@
 package br.gov.pa.ufpa.velocity;
 
-import java.sql.Connection;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.apache.commons.text.WordUtils;
 
@@ -86,14 +91,49 @@ public final class Utilitario {
                         && (tabela.getPrimaryKey().getColumns().size() > 1);
     }
 
-    public static Catalog obterCatalogo(final Connection conexao) throws SchemaCrawlerException {
+    private static SchemaCrawlerOptions obterOptions() {
 
-        // seta options
         final SchemaCrawlerOptions options = new SchemaCrawlerOptions();
-        options.setSchemaInfoLevel(SchemaInfoLevelBuilder.standard());
+        options.setSchemaInfoLevel(SchemaInfoLevelBuilder.detailed());
 
-        // Conecta
-        final Catalog catalog = SchemaCrawlerUtility.getCatalog(conexao, options);
-        return catalog;
+        return options;
+    }
+
+    public static Catalog obterCatalogo() throws SchemaCrawlerException {
+
+        return SchemaCrawlerUtility.getCatalog(SingletonConexao.getConexao(), Utilitario.obterOptions());
+    }
+
+    public static Map<ForeignKey, ForeignKeyColumnReference> obterFKs() {
+
+        final Map<ForeignKey, ForeignKeyColumnReference> mapaFK = new LinkedHashMap<>();
+
+        try {
+
+            final Catalog catalogo = Utilitario.obterCatalogo();
+
+            final Collection<Table> tables = catalogo.getTables().stream()
+                            .sorted(Comparator.comparing(Table::getSchema)
+                                            .thenComparing(Table::getName))
+                            .collect(Collectors.toList());
+
+            for (final Table tabela : tables) {
+                // System.out.println(tabela.getName());
+                final Collection<ForeignKey> importedForeignKeys = tabela.getImportedForeignKeys();
+                for (final ForeignKey importedFK : importedForeignKeys) {
+                    final List<ForeignKeyColumnReference> columnReferences = importedFK.getColumnReferences();
+                    for (final ForeignKeyColumnReference FKCR : columnReferences) {
+                        mapaFK.put(importedFK, FKCR);
+                        // System.out.println(importedFK + "\t" + FKCR);
+                    }
+                }
+                // System.out.println();
+            }
+
+        } catch (final SchemaCrawlerException e) {
+            e.printStackTrace();
+        }
+
+        return mapaFK;
     }
 }

@@ -6,6 +6,7 @@ import java.util.Collection;
 import org.testng.annotations.Test;
 
 import br.gov.pa.ufpa.velocity.SingletonConexao;
+import br.gov.pa.ufpa.velocity.Utilitario;
 import schemacrawler.schema.Catalog;
 import schemacrawler.schema.Column;
 import schemacrawler.schema.ForeignKey;
@@ -90,12 +91,6 @@ public class TesteAprendizado {
     @Test(enabled = TesteAprendizado.Habilitado)
     private void obterFKs() {
 
-        try {
-            for (final Schema schemas : this.obterCatalogo().getSchemas()) {
-                System.out.println(schemas.getName());
-            }
-        } catch (final SchemaCrawlerException e) {
-            e.printStackTrace();
-        }
+        Utilitario.obterFKs();
     }
 }

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" ignored="2" total="3" passed="1">
+<testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="2604" started-at="2019-09-10T14:53:18Z" finished-at="2019-09-10T14:53:21Z">
+  <suite name="Default suite" duration-ms="6599" started-at="2019-09-10T17:02:28Z" finished-at="2019-09-10T17:02:35Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="2604" started-at="2019-09-10T14:53:18Z" finished-at="2019-09-10T14:53:21Z">
-      <class name="br.gov.pa.ufpa.velocity.teste.TesteAprendizado">
-        <test-method status="PASS" signature="obterFKs()[pri:0, instance:br.gov.pa.ufpa.velocity.teste.TesteAprendizado@79f227a9]" name="obterFKs" duration-ms="2579" started-at="2019-09-10T14:53:18Z" finished-at="2019-09-10T14:53:21Z">
+    <test name="Default test" duration-ms="6599" started-at="2019-09-10T17:02:28Z" finished-at="2019-09-10T17:02:35Z">
+      <class name="br.gov.pa.ufpa.velocity.teste.TesteSQL">
+        <test-method status="PASS" signature="TesteGerarSQL()[pri:0, instance:br.gov.pa.ufpa.velocity.teste.TesteSQL@42d80b78]" name="TesteGerarSQL" duration-ms="6578" started-at="2019-09-10T17:02:28Z" finished-at="2019-09-10T17:02:35Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- obterFKs -->
-      </class> <!-- br.gov.pa.ufpa.velocity.teste.TesteAprendizado -->
+        </test-method> <!-- TesteGerarSQL -->
+      </class> <!-- br.gov.pa.ufpa.velocity.teste.TesteSQL -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

@@ -702,85 +702,912 @@ id_nota_despesa_transporte varchar (255) NOT NULL,
 id_tipo_despesa_transporte varchar (255) NOT NULL
 );
 
-ALTER TABLE agendamento.recurso ADD PRIMARY KEY (id_recurso);
-ALTER TABLE agendamento.agendamento ADD PRIMARY KEY (id_agendamento);
-ALTER TABLE agendamento.responsavel_recurso ADD PRIMARY KEY (id_responsavel_recurso);
-ALTER TABLE agendamento.recurso_agendamento ADD PRIMARY KEY (id_recurso_agendamento);
-ALTER TABLE coss.tipo_equipamento ADD PRIMARY KEY (id_tipo_equipamento);
-ALTER TABLE coss.tipo_servico ADD PRIMARY KEY (id_tipo_servico);
-ALTER TABLE coss.tipo_material ADD PRIMARY KEY (id_tipo_material);
-ALTER TABLE coss.movimentacao_tipo_material ADD PRIMARY KEY (id_movimentacao_tipo_material);
-ALTER TABLE coss.solicitacao_servico ADD PRIMARY KEY (id_solicitacao_servico);
-ALTER TABLE coss.uso_material_solicitacao_servico ADD PRIMARY KEY (id_uso_material_solicitacao_servico);
-ALTER TABLE curriculum_vitae.tipo_producao_intelectual ADD PRIMARY KEY (id_tipo_producao_intelectual);
-ALTER TABLE curriculum_vitae.producao_intelectual ADD PRIMARY KEY (id_producao_intelectual);
-ALTER TABLE curriculum_vitae.producao_intelectual_fonte_recurso ADD PRIMARY KEY (id_producao_intelectual_fonte_recurso);
-ALTER TABLE curriculum_vitae.producao_intelectual_participante ADD PRIMARY KEY (id_producao_intelectual_participante);
-ALTER TABLE curriculum_vitae.tarefa_producao_intelectual ADD PRIMARY KEY (id_tarefa_producao_intelectual);
-ALTER TABLE imunizacao.local_vacinacao ADD PRIMARY KEY (id_local_vacinacao);
-ALTER TABLE imunizacao.tipo_vacina ADD PRIMARY KEY (id_tipo_vacina);
-ALTER TABLE imunizacao.codigo_vacina ADD PRIMARY KEY (id_codigo_vacina);
-ALTER TABLE imunizacao.lote_vacina ADD PRIMARY KEY (id_lote_vacina);
-ALTER TABLE imunizacao.caderneta_vacinacao ADD PRIMARY KEY (id_caderneta_vacinacao);
-ALTER TABLE imunizacao.vacina ADD PRIMARY KEY (id_vacina);
-ALTER TABLE inscricao.cadastro ADD PRIMARY KEY (id_cadastro);
-ALTER TABLE inscricao.calendario_inscricao ADD PRIMARY KEY (id_calendario);
-ALTER TABLE inscricao.inscricao ADD PRIMARY KEY (id_inscricao);
-ALTER TABLE inscricao.certificado ADD PRIMARY KEY (id_certificado);
-ALTER TABLE pesquisa.aparelho_coleta ADD PRIMARY KEY (id_aparelho_coleta);
-ALTER TABLE pesquisa.exame_taxonomico ADD PRIMARY KEY (id_exame_taxonomico);
-ALTER TABLE pesquisa.ser_taxonomico ADD PRIMARY KEY (id_ser_taxonomico);
-ALTER TABLE pesquisa.taxonomia ADD PRIMARY KEY (id_taxonomia);
-ALTER TABLE pesquisa.tipo_atracao ADD PRIMARY KEY (id_tipo_atracao);
-ALTER TABLE pesquisa.tipo_coleta ADD PRIMARY KEY (id_tipo_coleta);
-ALTER TABLE pesquisa.classificacao_taxonomica ADD PRIMARY KEY (id_classificacao_taxonomica);
-ALTER TABLE pesquisa.boletim_identificacao ADD PRIMARY KEY (id_boletim_identificacao);
-ALTER TABLE pesquisa.identificacao_taxonomica ADD PRIMARY KEY (id_identificacao_taxonomica);
-ALTER TABLE pesquisa.lote_taxonomico ADD PRIMARY KEY (id_lote_taxonomico);
-ALTER TABLE pesquisa.pesquisa_taxonomica ADD PRIMARY KEY (id_pesquisa_taxonomica);
-ALTER TABLE pibic.tipo_documento_base_pibic ADD PRIMARY KEY (id_tipo_documento_base_pibic);
-ALTER TABLE pibic.calendario_submissao ADD PRIMARY KEY (id_calendario);
-ALTER TABLE pibic.tipo_documento_calendario_pibic ADD PRIMARY KEY (id_tipo_documento_calendario_pibic);
-ALTER TABLE pibic.orientador ADD PRIMARY KEY (id_orientador);
-ALTER TABLE pibic.projeto_pibic ADD PRIMARY KEY (id_projeto);
-ALTER TABLE pibic.avaliador_projeto_pibic ADD PRIMARY KEY (id_avaliador_projeto_pibic);
-ALTER TABLE pibic.avaliacao_projeto_pibic ADD PRIMARY KEY (id_avaliacao_projeto_pibic);
-ALTER TABLE pibic.bolsista_projeto_pibic ADD PRIMARY KEY (id_bolsista_projeto_pibic);
-ALTER TABLE pibic.avaliacao_bolsista_pibic ADD PRIMARY KEY (id_avaliacao_bolsista_pibic);
-ALTER TABLE pibic.documento_bolsista_pibic ADD PRIMARY KEY (id_documento);
-ALTER TABLE pibic.documento_projeto_pibic ADD PRIMARY KEY (id_documento);
-ALTER TABLE public.calendario ADD PRIMARY KEY (id_calendario);
-ALTER TABLE public.cor ADD PRIMARY KEY (id_cor);
-ALTER TABLE public.documento ADD PRIMARY KEY (id_documento);
-ALTER TABLE public.espaco_geografico ADD PRIMARY KEY (id_espaco_geografico);
-ALTER TABLE public.espaco_organizacional ADD PRIMARY KEY (id_espaco_organizacional);
-ALTER TABLE public.fonte_recurso ADD PRIMARY KEY (id_fonte_recurso);
-ALTER TABLE public.instituicao_financeira ADD PRIMARY KEY (id_instituicao_financeira);
-ALTER TABLE public.projeto ADD PRIMARY KEY (id_projeto);
-ALTER TABLE public.unidade_medida ADD PRIMARY KEY (id_unidade_medida);
-ALTER TABLE public.arquivo ADD PRIMARY KEY (id_arquivo);
-ALTER TABLE public.pessoa ADD PRIMARY KEY (id_pessoa);
-ALTER TABLE public.pessoa_documento_identificacao ADD PRIMARY KEY (id_pessoa_documento_identificacao);
-ALTER TABLE public.pessoa_fisica ADD PRIMARY KEY (id_pessoa);
-ALTER TABLE public.pessoa_juridica ADD PRIMARY KEY (id_pessoa);
-ALTER TABLE public.pessoa_telefone ADD PRIMARY KEY (id_pessoa_telefone);
-ALTER TABLE public.cargo ADD PRIMARY KEY (id_cargo);
-ALTER TABLE public.instituicao_ensino ADD PRIMARY KEY (id_instituicao_ensino);
-ALTER TABLE public.curso ADD PRIMARY KEY (id_curso);
-ALTER TABLE public.empregado ADD PRIMARY KEY (id_empregado);
-ALTER TABLE public.consultor_ad_hoc ADD PRIMARY KEY (id_empregado);
-ALTER TABLE public.documento_frequencia ADD PRIMARY KEY (id_documento);
-ALTER TABLE public.servidor_publico ADD PRIMARY KEY (id_empregado);
-ALTER TABLE public.terceirizado ADD PRIMARY KEY (id_empregado);
-ALTER TABLE public.treinamento ADD PRIMARY KEY (id_empregado);
-ALTER TABLE public.bolsista ADD PRIMARY KEY (id_empregado);
-ALTER TABLE transporte.fabricante ADD PRIMARY KEY (id_fabricante);
-ALTER TABLE transporte.relatorio_veiculo_pj_mes ADD PRIMARY KEY (tx_placa);
-ALTER TABLE transporte.tipo_despesa_transporte ADD PRIMARY KEY (id_tipo_despesa_transporte);
-ALTER TABLE transporte.modelo ADD PRIMARY KEY (id_modelo);
-ALTER TABLE transporte.veiculo ADD PRIMARY KEY (id_veiculo);
-ALTER TABLE transporte.veiculo_pessoa_fisica ADD PRIMARY KEY (id_veiculo);
-ALTER TABLE transporte.veiculo_pessoa_juridica ADD PRIMARY KEY (id_veiculo);
-ALTER TABLE transporte.resumo_controle_diario ADD PRIMARY KEY (id_resumo_controle_diario);
-ALTER TABLE transporte.nota_despesa_transporte ADD PRIMARY KEY (id_nota_despesa_transporte);
-ALTER TABLE transporte.item_despesa_transporte ADD PRIMARY KEY (id_item_despesa_transporte);
+ALTER TABLE agendamento.recurso
+ADD CONSTRAINT recurso_pkey PRIMARY KEY (id_recurso);
+ALTER TABLE agendamento.agendamento
+ADD CONSTRAINT agendamento_pkey PRIMARY KEY (id_agendamento);
+ALTER TABLE agendamento.responsavel_recurso
+ADD CONSTRAINT responsavel_recurso_pkey PRIMARY KEY (id_responsavel_recurso);
+ALTER TABLE agendamento.recurso_agendamento
+ADD CONSTRAINT recurso_agendamento_pkey PRIMARY KEY (id_recurso_agendamento);
+ALTER TABLE coss.tipo_equipamento
+ADD CONSTRAINT tipo_equipamento_pkey PRIMARY KEY (id_tipo_equipamento);
+ALTER TABLE coss.tipo_servico
+ADD CONSTRAINT tipo_servico_pkey PRIMARY KEY (id_tipo_servico);
+ALTER TABLE coss.tipo_material
+ADD CONSTRAINT tipo_material_pkey PRIMARY KEY (id_tipo_material);
+ALTER TABLE coss.movimentacao_tipo_material
+ADD CONSTRAINT movimentacao_tipo_material_pkey PRIMARY KEY (id_movimentacao_tipo_material);
+ALTER TABLE coss.solicitacao_servico
+ADD CONSTRAINT solicitacao_servico_pkey PRIMARY KEY (id_solicitacao_servico);
+ALTER TABLE coss.uso_material_solicitacao_servico
+ADD CONSTRAINT uso_material_solicitacao_servico_pkey PRIMARY KEY (id_uso_material_solicitacao_servico);
+ALTER TABLE curriculum_vitae.tipo_producao_intelectual
+ADD CONSTRAINT tipo_producao_intelectual_pkey PRIMARY KEY (id_tipo_producao_intelectual);
+ALTER TABLE curriculum_vitae.producao_intelectual
+ADD CONSTRAINT producao_intelectual_pkey PRIMARY KEY (id_producao_intelectual);
+ALTER TABLE curriculum_vitae.producao_intelectual_fonte_recurso
+ADD CONSTRAINT producao_intelectual_fonte_recurso_pkey PRIMARY KEY (id_producao_intelectual_fonte_recurso);
+ALTER TABLE curriculum_vitae.producao_intelectual_participante
+ADD CONSTRAINT producao_intelectual_participante_pkey PRIMARY KEY (id_producao_intelectual_participante);
+ALTER TABLE curriculum_vitae.tarefa_producao_intelectual
+ADD CONSTRAINT tarefa_producao_intelectual_pkey PRIMARY KEY (id_tarefa_producao_intelectual);
+ALTER TABLE imunizacao.local_vacinacao
+ADD CONSTRAINT local_vacinacao_pkey PRIMARY KEY (id_local_vacinacao);
+ALTER TABLE imunizacao.tipo_vacina
+ADD CONSTRAINT tipo_vacina_pkey PRIMARY KEY (id_tipo_vacina);
+ALTER TABLE imunizacao.codigo_vacina
+ADD CONSTRAINT codigo_vacina_pkey PRIMARY KEY (id_codigo_vacina);
+ALTER TABLE imunizacao.lote_vacina
+ADD CONSTRAINT lote_vacina_pkey PRIMARY KEY (id_lote_vacina);
+ALTER TABLE imunizacao.caderneta_vacinacao
+ADD CONSTRAINT caderneta_vacinacao_pkey PRIMARY KEY (id_caderneta_vacinacao);
+ALTER TABLE imunizacao.vacina
+ADD CONSTRAINT vacina_pkey PRIMARY KEY (id_vacina);
+ALTER TABLE inscricao.cadastro
+ADD CONSTRAINT cadastro_pkey PRIMARY KEY (id_cadastro);
+ALTER TABLE inscricao.calendario_inscricao
+ADD CONSTRAINT calendario_inscricao_pkey PRIMARY KEY (id_calendario);
+ALTER TABLE inscricao.inscricao
+ADD CONSTRAINT inscricao_pkey PRIMARY KEY (id_inscricao);
+ALTER TABLE inscricao.certificado
+ADD CONSTRAINT certificado_pkey PRIMARY KEY (id_certificado);
+ALTER TABLE pesquisa.aparelho_coleta
+ADD CONSTRAINT aparelho_coleta_pkey PRIMARY KEY (id_aparelho_coleta);
+ALTER TABLE pesquisa.exame_taxonomico
+ADD CONSTRAINT exame_taxonomico_pkey PRIMARY KEY (id_exame_taxonomico);
+ALTER TABLE pesquisa.ser_taxonomico
+ADD CONSTRAINT ser_taxonomico_pkey PRIMARY KEY (id_ser_taxonomico);
+ALTER TABLE pesquisa.taxonomia
+ADD CONSTRAINT taxonomia_pkey PRIMARY KEY (id_taxonomia);
+ALTER TABLE pesquisa.tipo_atracao
+ADD CONSTRAINT tipo_atracao_pkey PRIMARY KEY (id_tipo_atracao);
+ALTER TABLE pesquisa.tipo_coleta
+ADD CONSTRAINT tipo_coleta_pkey PRIMARY KEY (id_tipo_coleta);
+ALTER TABLE pesquisa.classificacao_taxonomica
+ADD CONSTRAINT classificacao_taxonomica_pkey PRIMARY KEY (id_classificacao_taxonomica);
+ALTER TABLE pesquisa.boletim_identificacao
+ADD CONSTRAINT boletim_identificacao_pkey PRIMARY KEY (id_boletim_identificacao);
+ALTER TABLE pesquisa.identificacao_taxonomica
+ADD CONSTRAINT identificacao_taxonomica_pkey PRIMARY KEY (id_identificacao_taxonomica);
+ALTER TABLE pesquisa.lote_taxonomico
+ADD CONSTRAINT lote_taxonomico_pkey PRIMARY KEY (id_lote_taxonomico);
+ALTER TABLE pesquisa.pesquisa_taxonomica
+ADD CONSTRAINT pesquisa_taxonomica_pkey PRIMARY KEY (id_pesquisa_taxonomica);
+ALTER TABLE pibic.tipo_documento_base_pibic
+ADD CONSTRAINT tipo_documento_base_pibic_pkey PRIMARY KEY (id_tipo_documento_base_pibic);
+ALTER TABLE pibic.calendario_submissao
+ADD CONSTRAINT calendario_submissao_pkey PRIMARY KEY (id_calendario);
+ALTER TABLE pibic.tipo_documento_calendario_pibic
+ADD CONSTRAINT tipo_documento_calendario_pibic_pkey PRIMARY KEY (id_tipo_documento_calendario_pibic);
+ALTER TABLE pibic.orientador
+ADD CONSTRAINT orientador_pkey PRIMARY KEY (id_orientador);
+ALTER TABLE pibic.projeto_pibic
+ADD CONSTRAINT projeto_pibic_pkey PRIMARY KEY (id_projeto);
+ALTER TABLE pibic.avaliador_projeto_pibic
+ADD CONSTRAINT avaliador_projeto_pibic_pkey PRIMARY KEY (id_avaliador_projeto_pibic);
+ALTER TABLE pibic.avaliacao_projeto_pibic
+ADD CONSTRAINT avaliacao_projeto_pibic_pkey PRIMARY KEY (id_avaliacao_projeto_pibic);
+ALTER TABLE pibic.bolsista_projeto_pibic
+ADD CONSTRAINT bolsista_projeto_pibic_pkey PRIMARY KEY (id_bolsista_projeto_pibic);
+ALTER TABLE pibic.avaliacao_bolsista_pibic
+ADD CONSTRAINT avaliacao_bolsista_pibic_pkey PRIMARY KEY (id_avaliacao_bolsista_pibic);
+ALTER TABLE pibic.documento_bolsista_pibic
+ADD CONSTRAINT documento_bolsista_pibic_pkey PRIMARY KEY (id_documento);
+ALTER TABLE pibic.documento_projeto_pibic
+ADD CONSTRAINT documento_projeto_pibic_pkey PRIMARY KEY (id_documento);
+ALTER TABLE public.calendario
+ADD CONSTRAINT calendario_pkey PRIMARY KEY (id_calendario);
+ALTER TABLE public.cor
+ADD CONSTRAINT cor_pkey PRIMARY KEY (id_cor);
+ALTER TABLE public.documento
+ADD CONSTRAINT documento_pkey PRIMARY KEY (id_documento);
+ALTER TABLE public.espaco_geografico
+ADD CONSTRAINT espaco_geografico_pkey PRIMARY KEY (id_espaco_geografico);
+ALTER TABLE public.espaco_organizacional
+ADD CONSTRAINT espaco_organizacional_pkey PRIMARY KEY (id_espaco_organizacional);
+ALTER TABLE public.fonte_recurso
+ADD CONSTRAINT fonte_recurso_pkey PRIMARY KEY (id_fonte_recurso);
+ALTER TABLE public.instituicao_financeira
+ADD CONSTRAINT instituicao_financeira_pkey PRIMARY KEY (id_instituicao_financeira);
+ALTER TABLE public.projeto
+ADD CONSTRAINT projeto_pkey PRIMARY KEY (id_projeto);
+ALTER TABLE public.unidade_medida
+ADD CONSTRAINT unidade_medida_pkey PRIMARY KEY (id_unidade_medida);
+ALTER TABLE public.arquivo
+ADD CONSTRAINT arquivo_pkey PRIMARY KEY (id_arquivo);
+ALTER TABLE public.pessoa
+ADD CONSTRAINT pessoa_pkey PRIMARY KEY (id_pessoa);
+ALTER TABLE public.pessoa_documento_identificacao
+ADD CONSTRAINT pessoa_documento_identificacao_pkey PRIMARY KEY (id_pessoa_documento_identificacao);
+ALTER TABLE public.pessoa_fisica
+ADD CONSTRAINT pessoa_fisica_pkey PRIMARY KEY (id_pessoa);
+ALTER TABLE public.pessoa_juridica
+ADD CONSTRAINT pessoa_juridica_pkey PRIMARY KEY (id_pessoa);
+ALTER TABLE public.pessoa_telefone
+ADD CONSTRAINT pessoa_telefone_pkey PRIMARY KEY (id_pessoa_telefone);
+ALTER TABLE public.cargo
+ADD CONSTRAINT cargo_pkey PRIMARY KEY (id_cargo);
+ALTER TABLE public.instituicao_ensino
+ADD CONSTRAINT instituicao_ensino_pkey PRIMARY KEY (id_instituicao_ensino);
+ALTER TABLE public.curso
+ADD CONSTRAINT curso_pkey PRIMARY KEY (id_curso);
+ALTER TABLE public.empregado
+ADD CONSTRAINT empregado_pkey PRIMARY KEY (id_empregado);
+ALTER TABLE public.consultor_ad_hoc
+ADD CONSTRAINT consultor_ad_hoc_pkey PRIMARY KEY (id_empregado);
+ALTER TABLE public.documento_frequencia
+ADD CONSTRAINT documento_frequencia_pkey PRIMARY KEY (id_documento);
+ALTER TABLE public.servidor_publico
+ADD CONSTRAINT servidor_publico_pkey PRIMARY KEY (id_empregado);
+ALTER TABLE public.terceirizado
+ADD CONSTRAINT terceirizado_pkey PRIMARY KEY (id_empregado);
+ALTER TABLE public.treinamento
+ADD CONSTRAINT treinamento_pkey PRIMARY KEY (id_empregado);
+ALTER TABLE public.bolsista
+ADD CONSTRAINT bolsista_pkey PRIMARY KEY (id_empregado);
+ALTER TABLE transporte.fabricante
+ADD CONSTRAINT fabricante_pkey PRIMARY KEY (id_fabricante);
+ALTER TABLE transporte.relatorio_veiculo_pj_mes
+ADD CONSTRAINT relatorio_veiculo_pj_mes_pkey PRIMARY KEY (tx_placa);
+ALTER TABLE transporte.tipo_despesa_transporte
+ADD CONSTRAINT tipo_despesa_transporte_pkey PRIMARY KEY (id_tipo_despesa_transporte);
+ALTER TABLE transporte.modelo
+ADD CONSTRAINT modelo_pkey PRIMARY KEY (id_modelo);
+ALTER TABLE transporte.veiculo
+ADD CONSTRAINT veiculo_pkey PRIMARY KEY (id_veiculo);
+ALTER TABLE transporte.veiculo_pessoa_fisica
+ADD CONSTRAINT veiculo_pessoa_fisica_pkey PRIMARY KEY (id_veiculo);
+ALTER TABLE transporte.veiculo_pessoa_juridica
+ADD CONSTRAINT veiculo_pessoa_juridica_pkey PRIMARY KEY (id_veiculo);
+ALTER TABLE transporte.resumo_controle_diario
+ADD CONSTRAINT resumo_controle_diario_pkey PRIMARY KEY (id_resumo_controle_diario);
+ALTER TABLE transporte.nota_despesa_transporte
+ADD CONSTRAINT nota_despesa_transporte_pkey PRIMARY KEY (id_nota_despesa_transporte);
+ALTER TABLE transporte.item_despesa_transporte
+ADD CONSTRAINT item_despesa_transporte_pkey PRIMARY KEY (id_item_despesa_transporte);
+
+ALTER TABLE agendamento.agendamento
+ADD CONSTRAINT fkg4r95jyntk1s5h67lbw84pdg8 FOREIGN KEY (id_empregado)
+REFERENCES public.empregado (id_empregado)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE agendamento.agendamento
+ADD CONSTRAINT fkiqbyufpcnqdjiipbgv5o1bua6 FOREIGN KEY (id_espaco_organizacional)
+REFERENCES public.espaco_organizacional (id_espaco_organizacional)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE agendamento.recurso
+ADD CONSTRAINT fkr8bcvjdp3fet6sj0ixxoycx9l FOREIGN KEY (id_recurso_pai)
+REFERENCES agendamento.recurso (id_recurso)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE agendamento.recurso_agendamento
+ADD CONSTRAINT fkm8jpyqlrg4890y6g48x26nuks FOREIGN KEY (id_agendamento)
+REFERENCES agendamento.agendamento (id_agendamento)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE agendamento.recurso_agendamento
+ADD CONSTRAINT fkcr8dl46t55usk7rcgfjyk78nf FOREIGN KEY (id_recurso)
+REFERENCES agendamento.recurso (id_recurso)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE agendamento.responsavel_recurso
+ADD CONSTRAINT fkbtg0v20gteyo046226q5dj8d5 FOREIGN KEY (id_recurso)
+REFERENCES agendamento.recurso (id_recurso)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE agendamento.responsavel_recurso
+ADD CONSTRAINT fkali8j8epu61773gg3xn2fje8t FOREIGN KEY (id_empregado_responsavel)
+REFERENCES public.empregado (id_empregado)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE coss.movimentacao_tipo_material
+ADD CONSTRAINT fks4xpkc5904x44gthulvqonmab FOREIGN KEY (id_tipo_material)
+REFERENCES coss.tipo_material (id_tipo_material)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE coss.solicitacao_servico
+ADD CONSTRAINT fk7hjv7ckmjjmd2rqmp6awjj6mu FOREIGN KEY (id_tipo_equipamento)
+REFERENCES coss.tipo_equipamento (id_tipo_equipamento)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE coss.solicitacao_servico
+ADD CONSTRAINT fkbs78dojw4esnjjwf9upg8ri6l FOREIGN KEY (id_tecnico)
+REFERENCES public.empregado (id_empregado)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE coss.solicitacao_servico
+ADD CONSTRAINT fkplmwqnurpdb4bw3c90ltxm1fq FOREIGN KEY (id_espaco_organizacional)
+REFERENCES public.espaco_organizacional (id_espaco_organizacional)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE coss.solicitacao_servico
+ADD CONSTRAINT fkt99hyariyfqmra7iyrmrp30jk FOREIGN KEY (id_pessoa_solicitante)
+REFERENCES public.pessoa_fisica (id_pessoa)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE coss.solicitacao_servico
+ADD CONSTRAINT fknrrj9aby90iy0xirgv2sllhlt FOREIGN KEY (id_servidor_recebimento)
+REFERENCES public.servidor_publico (id_empregado)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE coss.tipo_material
+ADD CONSTRAINT fk91oy5ma0hyoo0n4kq0mngp1yb FOREIGN KEY (id_tipo_servico)
+REFERENCES coss.tipo_servico (id_tipo_servico)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE coss.tipo_material
+ADD CONSTRAINT fklkui7lm8a9rg8eswsxw3916fp FOREIGN KEY (id_unidade_medida)
+REFERENCES public.unidade_medida (id_unidade_medida)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE coss.uso_material_solicitacao_servico
+ADD CONSTRAINT fkrcgdlm52x1bqis3i205nml88o FOREIGN KEY (id_movimentacao_tipo_material)
+REFERENCES coss.movimentacao_tipo_material (id_movimentacao_tipo_material)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE coss.uso_material_solicitacao_servico
+ADD CONSTRAINT fkju2ah6vvgjlon7mte526e3hu1 FOREIGN KEY (id_solicitacao_servico)
+REFERENCES coss.solicitacao_servico (id_solicitacao_servico)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE curriculum_vitae.producao_intelectual
+ADD CONSTRAINT fkn34tltqm793upmbfon0pclyvd FOREIGN KEY (id_producao_intelectual_pai)
+REFERENCES curriculum_vitae.producao_intelectual (id_producao_intelectual)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE curriculum_vitae.producao_intelectual
+ADD CONSTRAINT fk4ie2n655k2ow7s8ph6xqapt45 FOREIGN KEY (id_tipo_producao_intelectual)
+REFERENCES curriculum_vitae.tipo_producao_intelectual (id_tipo_producao_intelectual)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE curriculum_vitae.producao_intelectual
+ADD CONSTRAINT fkcx7rnoia9t9b3eb2hhirfhkpt FOREIGN KEY (id_pessoa)
+REFERENCES public.pessoa_fisica (id_pessoa)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE curriculum_vitae.producao_intelectual_fonte_recurso
+ADD CONSTRAINT fk64gxv89x1oq9qlav5fgdtx1hm FOREIGN KEY (id_producao_intelectual)
+REFERENCES curriculum_vitae.producao_intelectual (id_producao_intelectual)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE curriculum_vitae.producao_intelectual_fonte_recurso
+ADD CONSTRAINT fkt8pvlnirxqwkekhsvj9qtsqmb FOREIGN KEY (id_fonte_recurso)
+REFERENCES public.fonte_recurso (id_fonte_recurso)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE curriculum_vitae.producao_intelectual_participante
+ADD CONSTRAINT fk11l9hv9lqmaga4jgkmun0mhsm FOREIGN KEY (id_producao_intelectual)
+REFERENCES curriculum_vitae.producao_intelectual (id_producao_intelectual)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE curriculum_vitae.producao_intelectual_participante
+ADD CONSTRAINT fkcmpc1ufagskkcp5ll6r2fix79 FOREIGN KEY (id_pessoa)
+REFERENCES public.pessoa_fisica (id_pessoa)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE curriculum_vitae.tarefa_producao_intelectual
+ADD CONSTRAINT fk71ssusysbqe9llw6fpyiv7mja FOREIGN KEY (id_producao_intelectual)
+REFERENCES curriculum_vitae.producao_intelectual (id_producao_intelectual)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE curriculum_vitae.tarefa_producao_intelectual
+ADD CONSTRAINT fkc44fe92cr9w9dy8p74jsrjji0 FOREIGN KEY (id_tarefa_producao_intelectual_pai)
+REFERENCES curriculum_vitae.tarefa_producao_intelectual (id_tarefa_producao_intelectual)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE curriculum_vitae.tipo_producao_intelectual
+ADD CONSTRAINT fk5q62uoeqvsjy1q1wr2mers3a8 FOREIGN KEY (id_tipo_producao_intelectual_pai)
+REFERENCES curriculum_vitae.tipo_producao_intelectual (id_tipo_producao_intelectual)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE imunizacao.caderneta_vacinacao
+ADD CONSTRAINT fk4leraawfb1d5er9ji7miwlbf1 FOREIGN KEY (id_pessoa_fisica)
+REFERENCES public.pessoa_fisica (id_pessoa)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE imunizacao.codigo_vacina
+ADD CONSTRAINT fkkqe3dqq14be0x8g3lw2b4y4pq FOREIGN KEY (id_tipo_vacina)
+REFERENCES imunizacao.tipo_vacina (id_tipo_vacina)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE imunizacao.lote_vacina
+ADD CONSTRAINT fk7dfkvnnuithb89b82j6f26uf3 FOREIGN KEY (id_tipo_vacina)
+REFERENCES imunizacao.tipo_vacina (id_tipo_vacina)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE imunizacao.vacina
+ADD CONSTRAINT fk1jpd4jyn7krj9jbgblp76748u FOREIGN KEY (id_caderneta_vacinacao)
+REFERENCES imunizacao.caderneta_vacinacao (id_caderneta_vacinacao)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE imunizacao.vacina
+ADD CONSTRAINT fkirlqmuml7lk4a070utnygcucw FOREIGN KEY (id_codigo_vacina)
+REFERENCES imunizacao.codigo_vacina (id_codigo_vacina)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE imunizacao.vacina
+ADD CONSTRAINT fk2twvnu2o570i4ewnt87u4r9yx FOREIGN KEY (id_local_vacinacao)
+REFERENCES imunizacao.local_vacinacao (id_local_vacinacao)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE imunizacao.vacina
+ADD CONSTRAINT fkh6auq1hf8ystecm8bjc84cyik FOREIGN KEY (id_lote_vacina)
+REFERENCES imunizacao.lote_vacina (id_lote_vacina)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE imunizacao.vacina
+ADD CONSTRAINT fkhtusndn2v35rq4pbr4lcyg9o6 FOREIGN KEY (id_empregado)
+REFERENCES public.empregado (id_empregado)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE inscricao.cadastro
+ADD CONSTRAINT fkrg4fjbw850sm5t5q89rqcw0e7 FOREIGN KEY (id_pessoa)
+REFERENCES public.pessoa_fisica (id_pessoa)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE inscricao.calendario_inscricao
+ADD CONSTRAINT fkfc2bybgt2seyt55dtfa9uenky FOREIGN KEY (id_calendario)
+REFERENCES public.calendario (id_calendario)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE inscricao.calendario_inscricao
+ADD CONSTRAINT fk9pej2vqchv6kii71wl9beg2ry FOREIGN KEY (id_curso)
+REFERENCES public.curso (id_curso)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE inscricao.certificado
+ADD CONSTRAINT fkavir6id4rjvt6r1pbwt91219m FOREIGN KEY (id_inscricao)
+REFERENCES inscricao.inscricao (id_inscricao)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE inscricao.inscricao
+ADD CONSTRAINT fkb6o3o08y12rb6ylsxaar86fke FOREIGN KEY (id_cadastro)
+REFERENCES inscricao.cadastro (id_cadastro)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE inscricao.inscricao
+ADD CONSTRAINT fkdsb6i0wrhsrlhqa720ts2189k FOREIGN KEY (id_calendario_inscricao)
+REFERENCES inscricao.calendario_inscricao (id_calendario)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE pesquisa.boletim_identificacao
+ADD CONSTRAINT fkefanejyam8ablepea5im1c062 FOREIGN KEY (id_aparelho_coleta)
+REFERENCES pesquisa.aparelho_coleta (id_aparelho_coleta)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE pesquisa.boletim_identificacao
+ADD CONSTRAINT fk8ynq5vss3r84werv1wjqn9chx FOREIGN KEY (id_tipo_atracao)
+REFERENCES pesquisa.tipo_atracao (id_tipo_atracao)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE pesquisa.boletim_identificacao
+ADD CONSTRAINT fkdlerf7jjq2eta1std4m4ydfrc FOREIGN KEY (id_tipo_coleta)
+REFERENCES pesquisa.tipo_coleta (id_tipo_coleta)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE pesquisa.boletim_identificacao
+ADD CONSTRAINT fk599ptith23ki104r4j2st7p5a FOREIGN KEY (id_espaco_geografico)
+REFERENCES public.espaco_geografico (id_espaco_geografico)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE pesquisa.boletim_identificacao
+ADD CONSTRAINT fka3nhyhe5pt46ahqets0u7v140 FOREIGN KEY (id_pessoa_fisica_registrador)
+REFERENCES public.pessoa_fisica (id_pessoa)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE pesquisa.classificacao_taxonomica
+ADD CONSTRAINT fka6sifcks1375cbk51wkblorxf FOREIGN KEY (id_ser_taxonomico)
+REFERENCES pesquisa.ser_taxonomico (id_ser_taxonomico)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE pesquisa.classificacao_taxonomica
+ADD CONSTRAINT fknhwa3sfuyg40l0mwkqtc3pdbl FOREIGN KEY (id_taxonomia)
+REFERENCES pesquisa.taxonomia (id_taxonomia)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE pesquisa.exame_taxonomico
+ADD CONSTRAINT fkof3uvfeweyhe89vkpnp4rxesc FOREIGN KEY (id_exame_taxonomico_pai)
+REFERENCES pesquisa.exame_taxonomico (id_exame_taxonomico)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE pesquisa.identificacao_taxonomica
+ADD CONSTRAINT fkquj8wt9mf1f5d7uso9l7f6kpa FOREIGN KEY (id_boletim_identificacao)
+REFERENCES pesquisa.boletim_identificacao (id_boletim_identificacao)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE pesquisa.identificacao_taxonomica
+ADD CONSTRAINT fkfbf1t44m9uhja4u8wg40txsco FOREIGN KEY (id_classificacao_taxonomica)
+REFERENCES pesquisa.classificacao_taxonomica (id_classificacao_taxonomica)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE pesquisa.identificacao_taxonomica
+ADD CONSTRAINT fka2rtrs4c1lx9bn5hgol0wfqaw FOREIGN KEY (id_pessoa_fisica_registrador)
+REFERENCES public.pessoa_fisica (id_pessoa)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE pesquisa.lote_taxonomico
+ADD CONSTRAINT fke3aql5ja1ul8n38c2ee9l4ls1 FOREIGN KEY (id_boletim_identificacao)
+REFERENCES pesquisa.boletim_identificacao (id_boletim_identificacao)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE pesquisa.lote_taxonomico
+ADD CONSTRAINT fk3gcwfsi5ajhhvj76fjifxhpy7 FOREIGN KEY (id_classificacao_taxonomica)
+REFERENCES pesquisa.classificacao_taxonomica (id_classificacao_taxonomica)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE pesquisa.pesquisa_taxonomica
+ADD CONSTRAINT fke3t03x3qtixowfak1mmvq903n FOREIGN KEY (id_exame_taxonomico)
+REFERENCES pesquisa.exame_taxonomico (id_exame_taxonomico)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE pesquisa.pesquisa_taxonomica
+ADD CONSTRAINT fkr0p5ccqcogxxjsglc12l529ll FOREIGN KEY (id_lote_taxonomico)
+REFERENCES pesquisa.lote_taxonomico (id_lote_taxonomico)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE pesquisa.pesquisa_taxonomica
+ADD CONSTRAINT fk2edmb6mvhbdnx8k2gkho9oo0 FOREIGN KEY (id_pessoa_examinador)
+REFERENCES public.pessoa_fisica (id_pessoa)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE pesquisa.ser_taxonomico
+ADD CONSTRAINT fkknd6b1m08yvh90ivj0ws8b311 FOREIGN KEY (id_ser_taxonomico_pai)
+REFERENCES pesquisa.ser_taxonomico (id_ser_taxonomico)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE pesquisa.taxonomia
+ADD CONSTRAINT fkpcm3pa6f8hm5pk7qeb1lhellj FOREIGN KEY (id_taxonomia_pai)
+REFERENCES pesquisa.taxonomia (id_taxonomia)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE pibic.avaliacao_bolsista_pibic
+ADD CONSTRAINT fkct8ymcija0c8qf23jo98gdpx3 FOREIGN KEY (id_bolsista_projeto_pibic)
+REFERENCES pibic.bolsista_projeto_pibic (id_bolsista_projeto_pibic)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE pibic.avaliacao_projeto_pibic
+ADD CONSTRAINT fk2uit1trkdrc2os05pearr4d06 FOREIGN KEY (id_avaliador_projeto_pibic)
+REFERENCES pibic.avaliador_projeto_pibic (id_avaliador_projeto_pibic)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE pibic.avaliador_projeto_pibic
+ADD CONSTRAINT fkajcag3ajnalfooffmgi647oc6 FOREIGN KEY (id_projeto)
+REFERENCES pibic.projeto_pibic (id_projeto)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE pibic.avaliador_projeto_pibic
+ADD CONSTRAINT fkmq3hf2lct48e163gvliy5wifl FOREIGN KEY (id_empregado)
+REFERENCES public.empregado (id_empregado)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE pibic.bolsista_projeto_pibic
+ADD CONSTRAINT fkh29sb0i9nvy2besbft07e9lj7 FOREIGN KEY (id_projeto)
+REFERENCES pibic.projeto_pibic (id_projeto)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE pibic.bolsista_projeto_pibic
+ADD CONSTRAINT fkjpk2yevhfdxb1sjbm6v7bk455 FOREIGN KEY (id_bolsista)
+REFERENCES public.bolsista (id_empregado)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE pibic.calendario_submissao
+ADD CONSTRAINT fk3ih38654skv1ahwt88xvmpfji FOREIGN KEY (id_calendario)
+REFERENCES public.calendario (id_calendario)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE pibic.documento_bolsista_pibic
+ADD CONSTRAINT fkjyg4drs9abxvx8ok4rpnylo13 FOREIGN KEY (id_avaliacao_bolsista_pibic)
+REFERENCES pibic.avaliacao_bolsista_pibic (id_avaliacao_bolsista_pibic)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE pibic.documento_bolsista_pibic
+ADD CONSTRAINT fk9hg5lurxw2ua8rqegemr1dxcg FOREIGN KEY (id_projeto)
+REFERENCES pibic.projeto_pibic (id_projeto)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE pibic.documento_bolsista_pibic
+ADD CONSTRAINT fkjsvy5xrgw46wigtu4np0yjvop FOREIGN KEY (id_documento)
+REFERENCES public.documento (id_documento)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE pibic.documento_projeto_pibic
+ADD CONSTRAINT fku9c20h8e2q3jncofd71vwyv FOREIGN KEY (id_avaliacao_bolsista_pibic)
+REFERENCES pibic.avaliacao_bolsista_pibic (id_avaliacao_bolsista_pibic)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE pibic.documento_projeto_pibic
+ADD CONSTRAINT fk71a0dvmal6f3q3n3prg8w63ax FOREIGN KEY (id_projeto)
+REFERENCES pibic.projeto_pibic (id_projeto)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE pibic.documento_projeto_pibic
+ADD CONSTRAINT fkyfqocrlatpbj53mxj6vdf2sy FOREIGN KEY (id_tipo_documento_base_pibic)
+REFERENCES pibic.tipo_documento_base_pibic (id_tipo_documento_base_pibic)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE pibic.documento_projeto_pibic
+ADD CONSTRAINT fkhpijiwjjhl6eh0xjl33pj6c9u FOREIGN KEY (id_documento)
+REFERENCES public.documento (id_documento)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE pibic.orientador
+ADD CONSTRAINT fk6pd4yl4pxb6y1owm41gp53yf5 FOREIGN KEY (id_empregado)
+REFERENCES public.empregado (id_empregado)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE pibic.projeto_pibic
+ADD CONSTRAINT fkqyq09vajaoihmwhenqgf1efgx FOREIGN KEY (id_calendario_submissao)
+REFERENCES pibic.calendario_submissao (id_calendario)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE pibic.projeto_pibic
+ADD CONSTRAINT fk418rx29nyav2gkj1biqta7vyk FOREIGN KEY (id_orientador)
+REFERENCES pibic.orientador (id_orientador)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE pibic.projeto_pibic
+ADD CONSTRAINT fk76tpn5k9lja60t4xwpghqkua3 FOREIGN KEY (id_projeto)
+REFERENCES public.projeto (id_projeto)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE pibic.tipo_documento_calendario_pibic
+ADD CONSTRAINT fk2jnapg22w2nyuhoxe50q8yrwm FOREIGN KEY (id_calendario_submissao)
+REFERENCES pibic.calendario_submissao (id_calendario)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE pibic.tipo_documento_calendario_pibic
+ADD CONSTRAINT fkl0p45y7bdk37ljplnwa14ht5d FOREIGN KEY (id_tipo_documento_base_pibic)
+REFERENCES pibic.tipo_documento_base_pibic (id_tipo_documento_base_pibic)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE public.arquivo
+ADD CONSTRAINT fk9vbhh2yb355iwf2xjqxrgxr0f FOREIGN KEY (id_documento)
+REFERENCES public.documento (id_documento)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE public.bolsista
+ADD CONSTRAINT fk7aljxx5t1ewgbv2woi2dmr082 FOREIGN KEY (id_orientador_externo)
+REFERENCES pibic.orientador (id_orientador)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE public.bolsista
+ADD CONSTRAINT fk1vcnsw0rsf0gj9h6ltf9pd6em FOREIGN KEY (id_orientador_iec)
+REFERENCES pibic.orientador (id_orientador)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE public.bolsista
+ADD CONSTRAINT fkjsm9rs6utr9s8proxw5botkjq FOREIGN KEY (id_projeto)
+REFERENCES pibic.projeto_pibic (id_projeto)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE public.bolsista
+ADD CONSTRAINT fkt3wv42ws38du0h02a7n39titv FOREIGN KEY (id_documento)
+REFERENCES public.documento (id_documento)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE public.bolsista
+ADD CONSTRAINT fk3ibg0aibfsk61b54u0k28r7kv FOREIGN KEY (id_empregado)
+REFERENCES public.empregado (id_empregado)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE public.bolsista
+ADD CONSTRAINT fkgg9y7yxyjv5l6livhm9ciiwrs FOREIGN KEY (id_instituicao_financeira)
+REFERENCES public.instituicao_financeira (id_instituicao_financeira)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE public.bolsista
+ADD CONSTRAINT fk8eos46vi7x5h5g0nbqymajn8c FOREIGN KEY (id_pessoa_juridica_fomentadora)
+REFERENCES public.pessoa_juridica (id_pessoa)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE public.cargo
+ADD CONSTRAINT fkcfq2f0mgvc18vr3xxhr7t61m0 FOREIGN KEY (id_pessoa)
+REFERENCES public.pessoa_juridica (id_pessoa)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE public.consultor_ad_hoc
+ADD CONSTRAINT fk4fgdofebs752aaikxe8w97pv5 FOREIGN KEY (id_empregado)
+REFERENCES public.empregado (id_empregado)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE public.curso
+ADD CONSTRAINT fkfoglu0g3sab1iodfpodis4j5u FOREIGN KEY (id_instituicao_ensino)
+REFERENCES public.instituicao_ensino (id_instituicao_ensino)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE public.documento_frequencia
+ADD CONSTRAINT fktiqfsvglxdwyds8bkl7finfyo FOREIGN KEY (id_documento)
+REFERENCES public.documento (id_documento)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE public.documento_frequencia
+ADD CONSTRAINT fkrtmda12qa1elec6dca7htjavt FOREIGN KEY (id_empregado)
+REFERENCES public.empregado (id_empregado)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE public.empregado
+ADD CONSTRAINT fkjfax7ximdwfg4gq52gjy5ubt5 FOREIGN KEY (id_cargo)
+REFERENCES public.cargo (id_cargo)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE public.empregado
+ADD CONSTRAINT fkpa21pt2fde0snqc6p5pbq7gq8 FOREIGN KEY (id_curso)
+REFERENCES public.curso (id_curso)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE public.empregado
+ADD CONSTRAINT fkehp4lnc10c9t7mws8x4m2l7va FOREIGN KEY (id_espaco_organizacional)
+REFERENCES public.espaco_organizacional (id_espaco_organizacional)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE public.empregado
+ADD CONSTRAINT fkab799qft60n8ovyqmdpu6msff FOREIGN KEY (id_pessoa)
+REFERENCES public.pessoa_fisica (id_pessoa)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE public.espaco_geografico
+ADD CONSTRAINT fkkkqsenhjpy0kjpd232hxb498r FOREIGN KEY (id_espaco_geografico_pai)
+REFERENCES public.espaco_geografico (id_espaco_geografico)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE public.espaco_organizacional
+ADD CONSTRAINT fkmfevwit3ihoyp8xba3p2xo992 FOREIGN KEY (id_espaco_organizacional_pai)
+REFERENCES public.espaco_organizacional (id_espaco_organizacional)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE public.instituicao_ensino
+ADD CONSTRAINT fkt0n93ajhfltlf6paqnh8tx2h0 FOREIGN KEY (id_empresa)
+REFERENCES public.pessoa_juridica (id_pessoa)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE public.pessoa
+ADD CONSTRAINT fkrjook905oak6beufbgtlgbwbq FOREIGN KEY (id_documento)
+REFERENCES public.documento (id_documento)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE public.pessoa
+ADD CONSTRAINT fkb2q7p6dh2vtk2yok7h4x9seu5 FOREIGN KEY (id_espaco_geografico)
+REFERENCES public.espaco_geografico (id_espaco_geografico)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE public.pessoa_documento_identificacao
+ADD CONSTRAINT fk69fycgc3s8tx52yqhxcmsinj1 FOREIGN KEY (id_espaco_geografico)
+REFERENCES public.espaco_geografico (id_espaco_geografico)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE public.pessoa_documento_identificacao
+ADD CONSTRAINT fki43jishragsolnq0r3f1q7pi4 FOREIGN KEY (id_pessoa)
+REFERENCES public.pessoa (id_pessoa)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE public.pessoa_fisica
+ADD CONSTRAINT fkea9gij1um6foxnlxl0mmp6sgl FOREIGN KEY (id_pessoa)
+REFERENCES public.pessoa (id_pessoa)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE public.pessoa_juridica
+ADD CONSTRAINT fkj4ky983kqonia200wrcm1n8eb FOREIGN KEY (id_pessoa)
+REFERENCES public.pessoa (id_pessoa)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE public.pessoa_telefone
+ADD CONSTRAINT fkolionf6sgxcxlofm1m4u9tm8f FOREIGN KEY (id_pessoa)
+REFERENCES public.pessoa (id_pessoa)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE public.servidor_publico
+ADD CONSTRAINT fkso1nyd0y0y2tuoor0lpbo9678 FOREIGN KEY (id_empregado)
+REFERENCES public.empregado (id_empregado)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE public.terceirizado
+ADD CONSTRAINT fkfqv6co66661882fi4e2v4nb0u FOREIGN KEY (id_empregado)
+REFERENCES public.empregado (id_empregado)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE public.treinamento
+ADD CONSTRAINT fk507aua2wd4p5lunfu6099cnqb FOREIGN KEY (id_empregado)
+REFERENCES public.empregado (id_empregado)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE transporte.item_despesa_transporte
+ADD CONSTRAINT fk7e7gg50cmrfpkm5elddqmrfuh FOREIGN KEY (id_nota_despesa_transporte)
+REFERENCES transporte.nota_despesa_transporte (id_nota_despesa_transporte)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE transporte.item_despesa_transporte
+ADD CONSTRAINT fkag75kj97bai8q3rk8hr0n9pdt FOREIGN KEY (id_tipo_despesa_transporte)
+REFERENCES transporte.tipo_despesa_transporte (id_tipo_despesa_transporte)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE transporte.modelo
+ADD CONSTRAINT fk6g24j4c5kgxvbarylavew9vbj FOREIGN KEY (id_fabricante)
+REFERENCES transporte.fabricante (id_fabricante)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE transporte.nota_despesa_transporte
+ADD CONSTRAINT fki7vhflo2sjscsmruwrskyxu89 FOREIGN KEY (id_empregado_motorista)
+REFERENCES public.empregado (id_empregado)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE transporte.nota_despesa_transporte
+ADD CONSTRAINT fkao4jequbg6eqrtg4b9a0ke8j FOREIGN KEY (id_pessoa_juridica)
+REFERENCES public.pessoa_juridica (id_pessoa)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE transporte.nota_despesa_transporte
+ADD CONSTRAINT fkxafk3083igym1sehg4hvlo3d FOREIGN KEY (id_servidor_responsavel)
+REFERENCES public.servidor_publico (id_empregado)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE transporte.nota_despesa_transporte
+ADD CONSTRAINT fk7com73wtpdlu8v8yh9w4yg2tj FOREIGN KEY (id_veiculo_pessoa_juridica)
+REFERENCES transporte.veiculo_pessoa_juridica (id_veiculo)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE transporte.resumo_controle_diario
+ADD CONSTRAINT fkj8h4ecnqge3oyfthvifjuwfy6 FOREIGN KEY (id_empregado_motorista)
+REFERENCES public.empregado (id_empregado)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE transporte.resumo_controle_diario
+ADD CONSTRAINT fk4dnd1ufokxswbfeu3ylfkx1cx FOREIGN KEY (id_veiculo_pessoa_juridica)
+REFERENCES transporte.veiculo_pessoa_juridica (id_veiculo)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE transporte.veiculo
+ADD CONSTRAINT fkagcoir8ewmck549kmxwhw1771 FOREIGN KEY (id_cor)
+REFERENCES public.cor (id_cor)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE transporte.veiculo
+ADD CONSTRAINT fke6rho6v2mrugiexqhwuec5hde FOREIGN KEY (id_modelo)
+REFERENCES transporte.modelo (id_modelo)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE transporte.veiculo_pessoa_fisica
+ADD CONSTRAINT fk2kfl2pmqch4dx2c5ab2h6m55 FOREIGN KEY (id_pessoa)
+REFERENCES public.pessoa_fisica (id_pessoa)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE transporte.veiculo_pessoa_fisica
+ADD CONSTRAINT fkllpi6nw2qvqqp8ppkqj3sy86q FOREIGN KEY (id_veiculo)
+REFERENCES transporte.veiculo (id_veiculo)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE transporte.veiculo_pessoa_juridica
+ADD CONSTRAINT fkb1te91saosr6xoc3cyl4olglg FOREIGN KEY (id_pessoa)
+REFERENCES public.pessoa_juridica (id_pessoa)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE transporte.veiculo_pessoa_juridica
+ADD CONSTRAINT fk3owj04k5r2kj0ialrco42t33r FOREIGN KEY (id_veiculo)
+REFERENCES transporte.veiculo (id_veiculo)
+ON UPDATE no action
+ON DELETE no action
+;
