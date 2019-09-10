@@ -41,17 +41,14 @@ public class TesteAprendizado {
 
         try {
             for (final Schema schema : this.obterCatalogo().getSchemas()) {
-                // System.out.println("catalogName: " + schema.getCatalogName());
                 System.out.println("nome: " + schema.getName());
-                // System.out.println("remarks: " + schema.getRemarks());
-                // System.out.println("atributos: " + schema.getAttributes());
             }
         } catch (final SchemaCrawlerException e) {
             e.printStackTrace();
         }
     }
 
-    @Test(enabled = TesteAprendizado.Habilitado)
+    @Test(enabled = !TesteAprendizado.Habilitado)
     private void imprimirTabelaPorSchema() {
 
         final String nome = "agendamento";
@@ -73,7 +70,10 @@ public class TesteAprendizado {
                             }
                             for (final ForeignKey fk : tabela.getForeignKeys()) {
                                 for (final ForeignKeyColumnReference fkCol : fk.getColumnReferences()) {
-                                    System.out.println(fkCol.getPrimaryKeyColumn().getFullName() + " : " + fkCol.getForeignKeyColumn().getFullName());
+                                    System.out.println(fkCol.getPrimaryKeyColumn().getParent() + " : " +
+                                                    fkCol.getForeignKeyColumn().getParent());
+                                    System.out.println(fkCol.getPrimaryKeyColumn().getFullName() + " : " +
+                                                    fkCol.getForeignKeyColumn().getFullName());
                                 }
                             }
                             System.out.println();
@@ -81,6 +81,18 @@ public class TesteAprendizado {
                         break;
                     }
                 }
+            }
+        } catch (final SchemaCrawlerException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test(enabled = TesteAprendizado.Habilitado)
+    private void obterFKs() {
+
+        try {
+            for (final Schema schemas : this.obterCatalogo().getSchemas()) {
+                System.out.println(schemas.getName());
             }
         } catch (final SchemaCrawlerException e) {
             e.printStackTrace();
