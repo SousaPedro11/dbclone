@@ -157,11 +157,66 @@ fk_turma SMALLINT,
 fk_sala SMALLINT
 );
 
+CREATE SCHEMA IF NOT EXISTS aula;
+CREATE TABLE IF NOT EXISTS aula.funcionarios(
+id INT AUTO_INCREMENT NOT NULL,
+nome VARCHAR (50),
+telefone VARCHAR (15),
+endereco VARCHAR (50),
+bairro VARCHAR (20),
+cep VARCHAR (8),
+salario DOUBLE,
+cidade VARCHAR (20)
+);
+
+CREATE SCHEMA IF NOT EXISTS cadastro;
+CREATE TABLE IF NOT EXISTS cadastro.curso(
+id INT NOT NULL,
+nome VARCHAR (30) NOT NULL,
+descricao TEXT,
+carga INT UNSIGNED,
+totaulas INT,
+ano YEAR
+);
+
+CREATE TABLE IF NOT EXISTS cadastro.pessoa(
+nome VARCHAR (30) NOT NULL,
+nascimento DATE,
+sexo ENUM,
+peso DECIMAL,
+altura DECIMAL,
+nacionalidade VARCHAR (20),
+id INT AUTO_INCREMENT NOT NULL
+);
+
+CREATE SCHEMA IF NOT EXISTS evento;
+CREATE TABLE IF NOT EXISTS evento.evento(
+codigo BIGINT AUTO_INCREMENT NOT NULL,
+data VARCHAR (255) NOT NULL,
+horario VARCHAR (255) NOT NULL,
+local VARCHAR (255) NOT NULL,
+nome VARCHAR (255) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS evento.role(
+nome_role VARCHAR (255) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS evento.users(
+nome VARCHAR (255) NOT NULL,
+senha VARCHAR (255)
+);
+
+CREATE TABLE IF NOT EXISTS evento.users_roles(
+users_nome VARCHAR (255) NOT NULL,
+roles_nome_role VARCHAR (255) NOT NULL
+);
+
 CREATE SCHEMA IF NOT EXISTS hospital;
 CREATE TABLE IF NOT EXISTS hospital.medico(
 id INT AUTO_INCREMENT NOT NULL,
 nome VARCHAR (45) NOT NULL,
-endereco VARCHAR (45) NOT NULL,
+endereco VARCHAR (80) NOT NULL,
 telefone VARCHAR (45) NOT NULL,
 crm VARCHAR (45) NOT NULL
 );
@@ -169,7 +224,7 @@ crm VARCHAR (45) NOT NULL
 CREATE TABLE IF NOT EXISTS hospital.paciente(
 id INT AUTO_INCREMENT NOT NULL,
 nome VARCHAR (45) NOT NULL,
-endereco VARCHAR (45) NOT NULL,
+endereco VARCHAR (80) NOT NULL,
 telefone VARCHAR (45) NOT NULL,
 cpf VARCHAR (45) NOT NULL
 );
@@ -177,7 +232,7 @@ cpf VARCHAR (45) NOT NULL
 CREATE TABLE IF NOT EXISTS hospital.secretaria(
 id INT AUTO_INCREMENT NOT NULL,
 nome VARCHAR (45) NOT NULL,
-endereco VARCHAR (45) NOT NULL,
+endereco VARCHAR (80) NOT NULL,
 telefone VARCHAR (45) NOT NULL,
 cpf VARCHAR (45) NOT NULL
 );
@@ -192,6 +247,154 @@ valor DECIMAL NOT NULL,
 pago BIT
 );
 
+CREATE SCHEMA IF NOT EXISTS phpmyadmin;
+CREATE TABLE IF NOT EXISTS phpmyadmin.pma__bookmark(
+id INT UNSIGNED AUTO_INCREMENT NOT NULL,
+dbase VARCHAR (255) NOT NULL,
+user VARCHAR (255) NOT NULL,
+label VARCHAR (255) NOT NULL,
+query TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS phpmyadmin.pma__central_columns(
+db_name VARCHAR (64) NOT NULL,
+col_name VARCHAR (64) NOT NULL,
+col_type VARCHAR (64) NOT NULL,
+col_length TEXT,
+col_collation VARCHAR (64) NOT NULL,
+col_isNull BIT NOT NULL,
+col_extra VARCHAR (255),
+col_default TEXT
+);
+
+CREATE TABLE IF NOT EXISTS phpmyadmin.pma__column_info(
+id INT UNSIGNED AUTO_INCREMENT NOT NULL,
+db_name VARCHAR (64) NOT NULL,
+table_name VARCHAR (64) NOT NULL,
+column_name VARCHAR (64) NOT NULL,
+comment VARCHAR (255) NOT NULL,
+mimetype VARCHAR (255) NOT NULL,
+transformation VARCHAR (255) NOT NULL,
+transformation_options VARCHAR (255) NOT NULL,
+input_transformation VARCHAR (255) NOT NULL,
+input_transformation_options VARCHAR (255) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS phpmyadmin.pma__designer_settings(
+username VARCHAR (64) NOT NULL,
+settings_data TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS phpmyadmin.pma__export_templates(
+id INT UNSIGNED AUTO_INCREMENT NOT NULL,
+username VARCHAR (64) NOT NULL,
+export_type VARCHAR (10) NOT NULL,
+template_name VARCHAR (64) NOT NULL,
+template_data TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS phpmyadmin.pma__favorite(
+username VARCHAR (64) NOT NULL,
+tables TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS phpmyadmin.pma__history(
+id BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
+username VARCHAR (64) NOT NULL,
+db VARCHAR (64) NOT NULL,
+table VARCHAR (64) NOT NULL,
+timevalue TIMESTAMP NOT NULL,
+sqlquery TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS phpmyadmin.pma__navigationhiding(
+username VARCHAR (64) NOT NULL,
+item_name VARCHAR (64) NOT NULL,
+item_type VARCHAR (64) NOT NULL,
+db_name VARCHAR (64) NOT NULL,
+table_name VARCHAR (64) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS phpmyadmin.pma__pdf_pages(
+db_name VARCHAR (64) NOT NULL,
+page_nr INT UNSIGNED AUTO_INCREMENT NOT NULL,
+page_descr VARCHAR (50) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS phpmyadmin.pma__recent(
+username VARCHAR (64) NOT NULL,
+tables TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS phpmyadmin.pma__relation(
+master_db VARCHAR (64) NOT NULL,
+master_table VARCHAR (64) NOT NULL,
+master_field VARCHAR (64) NOT NULL,
+foreign_db VARCHAR (64) NOT NULL,
+foreign_table VARCHAR (64) NOT NULL,
+foreign_field VARCHAR (64) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS phpmyadmin.pma__savedsearches(
+id INT UNSIGNED AUTO_INCREMENT NOT NULL,
+username VARCHAR (64) NOT NULL,
+db_name VARCHAR (64) NOT NULL,
+search_name VARCHAR (64) NOT NULL,
+search_data TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS phpmyadmin.pma__table_coords(
+db_name VARCHAR (64) NOT NULL,
+table_name VARCHAR (64) NOT NULL,
+pdf_page_number INT NOT NULL,
+x phpmyadmin."FLOAT UNSIGNED" NOT NULL,
+y phpmyadmin."FLOAT UNSIGNED" NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS phpmyadmin.pma__table_info(
+db_name VARCHAR (64) NOT NULL,
+table_name VARCHAR (64) NOT NULL,
+display_field VARCHAR (64) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS phpmyadmin.pma__table_uiprefs(
+username VARCHAR (64) NOT NULL,
+db_name VARCHAR (64) NOT NULL,
+table_name VARCHAR (64) NOT NULL,
+prefs TEXT NOT NULL,
+last_update TIMESTAMP NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS phpmyadmin.pma__tracking(
+db_name VARCHAR (64) NOT NULL,
+table_name VARCHAR (64) NOT NULL,
+version INT UNSIGNED NOT NULL,
+date_created DATETIME NOT NULL,
+date_updated DATETIME NOT NULL,
+schema_snapshot TEXT NOT NULL,
+schema_sql TEXT,
+data_sql LONGTEXT,
+tracking SET,
+tracking_active INT UNSIGNED NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS phpmyadmin.pma__userconfig(
+username VARCHAR (64) NOT NULL,
+timevalue TIMESTAMP NOT NULL,
+config_data TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS phpmyadmin.pma__usergroups(
+usergroup VARCHAR (64) NOT NULL,
+tab VARCHAR (64) NOT NULL,
+allowed ENUM NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS phpmyadmin.pma__users(
+username VARCHAR (64) NOT NULL,
+usergroup VARCHAR (64) NOT NULL
+);
+
 CREATE SCHEMA IF NOT EXISTS sys;
 CREATE TABLE IF NOT EXISTS sys.sys_config(
 variable VARCHAR (128) NOT NULL,
@@ -201,7 +404,7 @@ set_by VARCHAR (128)
 );
 
 CREATE TABLE IF NOT EXISTS sys.host_summary(
-host VARCHAR (255),
+host VARCHAR (60),
 statements DECIMAL,
 statement_latency TEXT,
 statement_avg_latency TEXT,
@@ -216,13 +419,13 @@ total_memory_allocated TEXT
 );
 
 CREATE TABLE IF NOT EXISTS sys.host_summary_by_file_io(
-host VARCHAR (255),
+host VARCHAR (60),
 ios DECIMAL,
 io_latency TEXT
 );
 
 CREATE TABLE IF NOT EXISTS sys.host_summary_by_file_io_type(
-host VARCHAR (255),
+host VARCHAR (60),
 event_name VARCHAR (128) NOT NULL,
 total BIGINT UNSIGNED NOT NULL,
 total_latency TEXT,
@@ -230,7 +433,7 @@ max_latency TEXT
 );
 
 CREATE TABLE IF NOT EXISTS sys.host_summary_by_stages(
-host VARCHAR (255),
+host VARCHAR (60),
 event_name VARCHAR (128) NOT NULL,
 total BIGINT UNSIGNED NOT NULL,
 total_latency TEXT,
@@ -238,7 +441,7 @@ avg_latency TEXT
 );
 
 CREATE TABLE IF NOT EXISTS sys.host_summary_by_statement_latency(
-host VARCHAR (255),
+host VARCHAR (60),
 total DECIMAL,
 total_latency TEXT,
 max_latency TEXT,
@@ -250,7 +453,7 @@ full_scans DECIMAL
 );
 
 CREATE TABLE IF NOT EXISTS sys.host_summary_by_statement_type(
-host VARCHAR (255),
+host VARCHAR (60),
 statement VARCHAR (128),
 total BIGINT UNSIGNED NOT NULL,
 total_latency TEXT,
@@ -312,12 +515,12 @@ blocking_trx_started DATETIME NOT NULL,
 blocking_trx_age TIME,
 blocking_trx_rows_locked BIGINT UNSIGNED NOT NULL,
 blocking_trx_rows_modified BIGINT UNSIGNED NOT NULL,
-sql_kill_blocking_query VARCHAR (32),
-sql_kill_blocking_connection VARCHAR (26)
+sql_kill_blocking_query VARCHAR (32) NOT NULL,
+sql_kill_blocking_connection VARCHAR (26) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS sys.io_by_thread_by_latency(
-user VARCHAR (288),
+user VARCHAR (128),
 total DECIMAL,
 total_latency TEXT,
 min_latency TEXT,
@@ -385,7 +588,7 @@ avg_written TEXT
 );
 
 CREATE TABLE IF NOT EXISTS sys.latest_file_io(
-thread VARCHAR (316),
+thread VARCHAR (149),
 file VARCHAR (512),
 latency TEXT,
 operation VARCHAR (32) NOT NULL,
@@ -393,7 +596,7 @@ requested TEXT
 );
 
 CREATE TABLE IF NOT EXISTS sys.memory_by_host_by_current_bytes(
-host VARCHAR (255),
+host VARCHAR (60),
 current_count_used DECIMAL,
 current_allocated TEXT,
 current_avg_alloc TEXT,
@@ -403,7 +606,7 @@ total_allocated TEXT
 
 CREATE TABLE IF NOT EXISTS sys.memory_by_thread_by_current_bytes(
 thread_id BIGINT UNSIGNED NOT NULL,
-user VARCHAR (288),
+user VARCHAR (128),
 current_count_used DECIMAL,
 current_allocated TEXT,
 current_avg_alloc TEXT,
@@ -435,7 +638,7 @@ total_allocated TEXT
 );
 
 CREATE TABLE IF NOT EXISTS sys.metrics(
-Variable_name VARCHAR (64),
+Variable_name VARCHAR (64) NOT NULL,
 Variable_value VARCHAR (1024),
 Type VARCHAR (13) NOT NULL,
 Enabled VARCHAR (3) NOT NULL
@@ -444,7 +647,7 @@ Enabled VARCHAR (3) NOT NULL
 CREATE TABLE IF NOT EXISTS sys.processlist(
 thd_id BIGINT UNSIGNED NOT NULL,
 conn_id BIGINT UNSIGNED,
-user VARCHAR (288),
+user VARCHAR (128),
 db VARCHAR (64),
 command VARCHAR (16),
 state VARCHAR (64),
@@ -610,7 +813,7 @@ index_name VARCHAR (64)
 CREATE TABLE IF NOT EXISTS sys.session(
 thd_id BIGINT UNSIGNED NOT NULL,
 conn_id BIGINT UNSIGNED,
-user VARCHAR (288),
+user VARCHAR (128),
 db VARCHAR (64),
 command VARCHAR (16),
 state VARCHAR (64),
@@ -836,7 +1039,7 @@ max_latency TEXT
 );
 
 CREATE TABLE IF NOT EXISTS sys.waits_by_host_by_latency(
-host VARCHAR (255),
+host VARCHAR (60),
 event VARCHAR (128) NOT NULL,
 total BIGINT UNSIGNED NOT NULL,
 total_latency TEXT,
@@ -862,7 +1065,7 @@ max_latency TEXT
 );
 
 CREATE TABLE IF NOT EXISTS sys.x$host_summary(
-host VARCHAR (255),
+host VARCHAR (60),
 statements DECIMAL,
 statement_latency DECIMAL,
 statement_avg_latency DECIMAL,
@@ -877,13 +1080,13 @@ total_memory_allocated DECIMAL
 );
 
 CREATE TABLE IF NOT EXISTS sys.x$host_summary_by_file_io(
-host VARCHAR (255),
+host VARCHAR (60),
 ios DECIMAL,
 io_latency DECIMAL
 );
 
 CREATE TABLE IF NOT EXISTS sys.x$host_summary_by_file_io_type(
-host VARCHAR (255),
+host VARCHAR (60),
 event_name VARCHAR (128) NOT NULL,
 total BIGINT UNSIGNED NOT NULL,
 total_latency BIGINT UNSIGNED NOT NULL,
@@ -891,7 +1094,7 @@ max_latency BIGINT UNSIGNED NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS sys.x$host_summary_by_stages(
-host VARCHAR (255),
+host VARCHAR (60),
 event_name VARCHAR (128) NOT NULL,
 total BIGINT UNSIGNED NOT NULL,
 total_latency BIGINT UNSIGNED NOT NULL,
@@ -899,7 +1102,7 @@ avg_latency BIGINT UNSIGNED NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS sys.x$host_summary_by_statement_latency(
-host VARCHAR (255),
+host VARCHAR (60),
 total DECIMAL,
 total_latency DECIMAL,
 max_latency BIGINT UNSIGNED,
@@ -911,7 +1114,7 @@ full_scans DECIMAL
 );
 
 CREATE TABLE IF NOT EXISTS sys.x$host_summary_by_statement_type(
-host VARCHAR (255),
+host VARCHAR (60),
 statement VARCHAR (128),
 total BIGINT UNSIGNED NOT NULL,
 total_latency BIGINT UNSIGNED NOT NULL,
@@ -973,12 +1176,12 @@ blocking_trx_started DATETIME NOT NULL,
 blocking_trx_age TIME,
 blocking_trx_rows_locked BIGINT UNSIGNED NOT NULL,
 blocking_trx_rows_modified BIGINT UNSIGNED NOT NULL,
-sql_kill_blocking_query VARCHAR (32),
-sql_kill_blocking_connection VARCHAR (26)
+sql_kill_blocking_query VARCHAR (32) NOT NULL,
+sql_kill_blocking_connection VARCHAR (26) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS sys.x$io_by_thread_by_latency(
-user VARCHAR (288),
+user VARCHAR (128),
 total DECIMAL,
 total_latency DECIMAL,
 min_latency BIGINT UNSIGNED,
@@ -1046,7 +1249,7 @@ avg_written DECIMAL NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS sys.x$latest_file_io(
-thread VARCHAR (316),
+thread VARCHAR (149),
 file VARCHAR (512),
 latency BIGINT UNSIGNED,
 operation VARCHAR (32) NOT NULL,
@@ -1054,7 +1257,7 @@ requested BIGINT
 );
 
 CREATE TABLE IF NOT EXISTS sys.x$memory_by_host_by_current_bytes(
-host VARCHAR (255),
+host VARCHAR (60),
 current_count_used DECIMAL,
 current_allocated DECIMAL,
 current_avg_alloc DECIMAL NOT NULL,
@@ -1064,7 +1267,7 @@ total_allocated DECIMAL
 
 CREATE TABLE IF NOT EXISTS sys.x$memory_by_thread_by_current_bytes(
 thread_id BIGINT UNSIGNED NOT NULL,
-user VARCHAR (288),
+user VARCHAR (128),
 current_count_used DECIMAL,
 current_allocated DECIMAL,
 current_avg_alloc DECIMAL NOT NULL,
@@ -1098,7 +1301,7 @@ total_allocated DECIMAL
 CREATE TABLE IF NOT EXISTS sys.x$processlist(
 thd_id BIGINT UNSIGNED NOT NULL,
 conn_id BIGINT UNSIGNED,
-user VARCHAR (288),
+user VARCHAR (128),
 db VARCHAR (64),
 command VARCHAR (16),
 state VARCHAR (64),
@@ -1253,7 +1456,7 @@ latency BIGINT UNSIGNED NOT NULL
 CREATE TABLE IF NOT EXISTS sys.x$session(
 thd_id BIGINT UNSIGNED NOT NULL,
 conn_id BIGINT UNSIGNED,
-user VARCHAR (288),
+user VARCHAR (128),
 db VARCHAR (64),
 command VARCHAR (16),
 state VARCHAR (64),
@@ -1467,7 +1670,7 @@ max_latency BIGINT UNSIGNED
 );
 
 CREATE TABLE IF NOT EXISTS sys.x$waits_by_host_by_latency(
-host VARCHAR (255),
+host VARCHAR (60),
 event VARCHAR (128) NOT NULL,
 total BIGINT UNSIGNED NOT NULL,
 total_latency BIGINT UNSIGNED NOT NULL,
@@ -1492,54 +1695,104 @@ avg_latency BIGINT UNSIGNED NOT NULL,
 max_latency BIGINT UNSIGNED NOT NULL
 );
 
-ALTER TABLE sys.aparelho
+ALTER TABLE academia.aparelho
 ADD CONSTRAINT aparelho_pkey PRIMARY KEY (cod);
-ALTER TABLE sys.cargo
+ALTER TABLE academia.cargo
 ADD CONSTRAINT cargo_pkey PRIMARY KEY (cod);
-ALTER TABLE sys.endereco
+ALTER TABLE academia.endereco
 ADD CONSTRAINT endereco_pkey PRIMARY KEY (cod);
-ALTER TABLE sys.plano
+ALTER TABLE academia.plano
 ADD CONSTRAINT plano_pkey PRIMARY KEY (cod);
-ALTER TABLE sys.sala
+ALTER TABLE academia.sala
 ADD CONSTRAINT sala_pkey PRIMARY KEY (cod);
-ALTER TABLE sys.unidade
+ALTER TABLE academia.unidade
 ADD CONSTRAINT unidade_pkey PRIMARY KEY (cod);
-ALTER TABLE sys.aluno
+ALTER TABLE academia.aluno
 ADD CONSTRAINT aluno_pkey PRIMARY KEY (matricula);
-ALTER TABLE sys.funcionario
+ALTER TABLE academia.funcionario
 ADD CONSTRAINT funcionario_pkey PRIMARY KEY (registro);
-ALTER TABLE sys.modalidade
+ALTER TABLE academia.modalidade
 ADD CONSTRAINT modalidade_pkey PRIMARY KEY (cod);
-ALTER TABLE sys.avaliacaofisica
+ALTER TABLE academia.avaliacaofisica
 ADD CONSTRAINT avaliacaofisica_pkey PRIMARY KEY (cod);
-ALTER TABLE sys.ficha
+ALTER TABLE academia.ficha
 ADD CONSTRAINT ficha_pkey PRIMARY KEY (cod);
-ALTER TABLE sys.funcionario_modalidade
+ALTER TABLE academia.funcionario_modalidade
 ADD CONSTRAINT funcionario_modalidade_pkey PRIMARY KEY (cod);
-ALTER TABLE sys.modalidade_sala
+ALTER TABLE academia.modalidade_sala
 ADD CONSTRAINT modalidade_sala_pkey PRIMARY KEY (cod);
-ALTER TABLE sys.pagamento
+ALTER TABLE academia.pagamento
 ADD CONSTRAINT pagamento_pkey PRIMARY KEY (cod);
-ALTER TABLE sys.plano_aluno
+ALTER TABLE academia.plano_aluno
 ADD CONSTRAINT plano_aluno_pkey PRIMARY KEY (cod);
-ALTER TABLE sys.plano_modalidade
+ALTER TABLE academia.plano_modalidade
 ADD CONSTRAINT plano_modalidade_pkey PRIMARY KEY (cod);
-ALTER TABLE sys.turma
+ALTER TABLE academia.turma
 ADD CONSTRAINT turma_pkey PRIMARY KEY (cod);
-ALTER TABLE sys.linha_ficha
+ALTER TABLE academia.linha_ficha
 ADD CONSTRAINT linha_ficha_pkey PRIMARY KEY (cod);
-ALTER TABLE sys.plano_turma
+ALTER TABLE academia.plano_turma
 ADD CONSTRAINT plano_turma_pkey PRIMARY KEY (cod);
-ALTER TABLE sys.turma_sala
+ALTER TABLE academia.turma_sala
 ADD CONSTRAINT turma_sala_pkey PRIMARY KEY (cod);
-ALTER TABLE sys.medico
+ALTER TABLE aula.funcionarios
+ADD CONSTRAINT funcionarios_pkey PRIMARY KEY (id);
+ALTER TABLE cadastro.curso
+ADD CONSTRAINT curso_pkey PRIMARY KEY (id);
+ALTER TABLE cadastro.pessoa
+ADD CONSTRAINT pessoa_pkey PRIMARY KEY (id);
+ALTER TABLE evento.evento
+ADD CONSTRAINT evento_pkey PRIMARY KEY (codigo);
+ALTER TABLE evento.role
+ADD CONSTRAINT role_pkey PRIMARY KEY (nome_role);
+ALTER TABLE evento.users
+ADD CONSTRAINT users_pkey PRIMARY KEY (nome);
+ALTER TABLE hospital.medico
 ADD CONSTRAINT medico_pkey PRIMARY KEY (id);
-ALTER TABLE sys.paciente
+ALTER TABLE hospital.paciente
 ADD CONSTRAINT paciente_pkey PRIMARY KEY (id);
-ALTER TABLE sys.secretaria
+ALTER TABLE hospital.secretaria
 ADD CONSTRAINT secretaria_pkey PRIMARY KEY (id);
-ALTER TABLE sys.consulta
+ALTER TABLE hospital.consulta
 ADD CONSTRAINT consulta_pkey PRIMARY KEY (id);
+ALTER TABLE phpmyadmin.pma__bookmark
+ADD CONSTRAINT pma__bookmark_pkey PRIMARY KEY (id);
+ALTER TABLE phpmyadmin.pma__central_columns
+ADD CONSTRAINT pma__central_columns_pkey PRIMARY KEY (db_name);
+ALTER TABLE phpmyadmin.pma__column_info
+ADD CONSTRAINT pma__column_info_pkey PRIMARY KEY (id);
+ALTER TABLE phpmyadmin.pma__designer_settings
+ADD CONSTRAINT pma__designer_settings_pkey PRIMARY KEY (username);
+ALTER TABLE phpmyadmin.pma__export_templates
+ADD CONSTRAINT pma__export_templates_pkey PRIMARY KEY (id);
+ALTER TABLE phpmyadmin.pma__favorite
+ADD CONSTRAINT pma__favorite_pkey PRIMARY KEY (username);
+ALTER TABLE phpmyadmin.pma__history
+ADD CONSTRAINT pma__history_pkey PRIMARY KEY (id);
+ALTER TABLE phpmyadmin.pma__navigationhiding
+ADD CONSTRAINT pma__navigationhiding_pkey PRIMARY KEY (username);
+ALTER TABLE phpmyadmin.pma__pdf_pages
+ADD CONSTRAINT pma__pdf_pages_pkey PRIMARY KEY (page_nr);
+ALTER TABLE phpmyadmin.pma__recent
+ADD CONSTRAINT pma__recent_pkey PRIMARY KEY (username);
+ALTER TABLE phpmyadmin.pma__relation
+ADD CONSTRAINT pma__relation_pkey PRIMARY KEY (master_db);
+ALTER TABLE phpmyadmin.pma__savedsearches
+ADD CONSTRAINT pma__savedsearches_pkey PRIMARY KEY (id);
+ALTER TABLE phpmyadmin.pma__table_coords
+ADD CONSTRAINT pma__table_coords_pkey PRIMARY KEY (db_name);
+ALTER TABLE phpmyadmin.pma__table_info
+ADD CONSTRAINT pma__table_info_pkey PRIMARY KEY (db_name);
+ALTER TABLE phpmyadmin.pma__table_uiprefs
+ADD CONSTRAINT pma__table_uiprefs_pkey PRIMARY KEY (username);
+ALTER TABLE phpmyadmin.pma__tracking
+ADD CONSTRAINT pma__tracking_pkey PRIMARY KEY (db_name);
+ALTER TABLE phpmyadmin.pma__userconfig
+ADD CONSTRAINT pma__userconfig_pkey PRIMARY KEY (username);
+ALTER TABLE phpmyadmin.pma__usergroups
+ADD CONSTRAINT pma__usergroups_pkey PRIMARY KEY (usergroup);
+ALTER TABLE phpmyadmin.pma__users
+ADD CONSTRAINT pma__users_pkey PRIMARY KEY (username);
 ALTER TABLE sys.sys_config
 ADD CONSTRAINT sys_config_pkey PRIMARY KEY (variable);
 
@@ -1684,6 +1937,18 @@ ON DELETE no action
 ALTER TABLE academia.turma_sala
 ADD CONSTRAINT FK_turma_sala_turma FOREIGN KEY (fk_turma)
 REFERENCES academia.turma (cod)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE evento.users_roles
+ADD CONSTRAINT FKgv8ypr50e3c06yjjkx76pxupr FOREIGN KEY (roles_nome_role)
+REFERENCES evento.role (nome_role)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE evento.users_roles
+ADD CONSTRAINT FKbnb14iywotdt02cbj0pj14hu2 FOREIGN KEY (users_nome)
+REFERENCES evento.users (nome)
 ON UPDATE no action
 ON DELETE no action
 ;
