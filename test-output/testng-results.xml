@@ -2,12 +2,12 @@
 <testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="6599" started-at="2019-09-10T17:02:28Z" finished-at="2019-09-10T17:02:35Z">
+  <suite name="Default suite" duration-ms="5126" started-at="2019-09-11T02:53:27Z" finished-at="2019-09-11T02:53:32Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="6599" started-at="2019-09-10T17:02:28Z" finished-at="2019-09-10T17:02:35Z">
+    <test name="Default test" duration-ms="5126" started-at="2019-09-11T02:53:27Z" finished-at="2019-09-11T02:53:32Z">
       <class name="br.gov.pa.ufpa.velocity.teste.TesteSQL">
-        <test-method status="PASS" signature="TesteGerarSQL()[pri:0, instance:br.gov.pa.ufpa.velocity.teste.TesteSQL@42d80b78]" name="TesteGerarSQL" duration-ms="6578" started-at="2019-09-10T17:02:28Z" finished-at="2019-09-10T17:02:35Z">
+        <test-method status="PASS" signature="TesteGerarSQL()[pri:0, instance:br.gov.pa.ufpa.velocity.teste.TesteSQL@5622fdf]" name="TesteGerarSQL" duration-ms="5104" started-at="2019-09-11T02:53:27Z" finished-at="2019-09-11T02:53:32Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- TesteGerarSQL -->

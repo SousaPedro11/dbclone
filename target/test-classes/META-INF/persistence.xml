@@ -23,13 +23,16 @@
 				name="javax.persistence.schema-generation.create-source"
 				value="script-then-metadata" />
 			<property name="javax.persistence.jdbc.driver"
-				value="org.postgresql.Driver" />
+				value="com.mysql.jdbc.Driver" />
 			<property name="javax.persistence.jdbc.url"
-				value="jdbc:postgresql://localhost:5433/dbclone" />
+				value="jdbc:mysql://localhost:3306/academia" />
+			<!-- <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" 
+				/> <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/dev_siec_2_5" 
+				/> -->
 			<property name="javax.persistence.jdbc.user"
-				value="sousapedro11" />
+				value="iec_desenv" />
 			<property name="javax.persistence.jdbc.password"
-				value="pedro_desenv" />
+				value="iec_desenv" />
 
 			<property
 				name="javax.persistence.schema-generation.create-script-source"

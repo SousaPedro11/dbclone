@@ -1,13 +1,14 @@
 ## Obtem Schemas
 #set ($schemas = $catalog.getSchemas())
 #***##foreach($schema in $schemas)
-#**	*##if((!$catalog.getTables($schema).isEmpty())&&(!$schema.getName().contains("COPY")))
-###**		*#CREATE SCHEMA IF NOT EXISTS #**$schema.getCatalogName()COPY.*#$schema.getName()COPY;
-#**		*#CREATE SCHEMA IF NOT EXISTS $schema.getName();
+#**	*##if((!$catalog.getTables($schema).isEmpty())&&(!$nomeSchemaFull.contains("COPY")))
+###**		*#CREATE SCHEMA IF NOT EXISTS #**$schema.getCatalogName()COPY.*#$nomeSchemaFullCOPY;
+#set ($nomeSchemaFull = $schema.getFullName())
+#**		*#CREATE SCHEMA IF NOT EXISTS $nomeSchemaFull;
 ## Obtem Tabelas
 #**		*##foreach($table in $catalog.getTables($schema))
-###**			*#CREATE TABLE IF NOT EXISTS $schema.getName()COPY.$table.getName()(
-#**			*#CREATE TABLE IF NOT EXISTS $schema.getName().$table.getName()(
+###**			*#CREATE TABLE IF NOT EXISTS $nomeSchemaFullCOPY.$table.getName()(
+#**			*#CREATE TABLE IF NOT EXISTS $nomeSchemaFull.$table.getName()(
 ## Obtem Colunas
 #**			*##foreach($coluna in $table.getColumns())
 #**				*#$coluna.getName() $coluna.getColumnDataType()#if($coluna.getColumnDataType() == "VARCHAR"||$coluna.getColumnDataType() == "varchar") ($coluna.getSize())#end#if($coluna.isAutoIncremented()) AUTO_INCREMENT#end#if(!$coluna.isNullable()) NOT NULL#end#if( $foreach.hasNext ),
@@ -23,12 +24,12 @@
 #***##end
 ## Gerar PK
 #***##foreach($schema in $schemas)
-#**	*##if((!$catalog.getTables($schema).isEmpty())&&(!$schema.getName().contains("COPY")))
+#**	*##if((!$catalog.getTables($schema).isEmpty())&&(!$nomeSchemaFull.contains("COPY")))
 ## Obtem Tabelas
 #**		*##foreach($table in $catalog.getTables($schema))
 #**			*##if($table.hasPrimaryKey())
-###**				*#ALTER TABLE $schema.getName()COPY.$table.getName() ADD PRIMARY KEY ($table.getPrimaryKey().getColumns().get(0).getName());
-#**				*#ALTER TABLE $schema.getName().$table.getName()
+###**				*#ALTER TABLE $nomeSchemaFullCOPY.$table.getName() ADD PRIMARY KEY ($table.getPrimaryKey().getColumns().get(0).getName());
+#**				*#ALTER TABLE $nomeSchemaFull.$table.getName()
 #**             *#ADD CONSTRAINT $table.getName()_pkey PRIMARY KEY ($table.getPrimaryKey().getColumns().get(0).getName());
 #**			*##end
 #**		*##end
