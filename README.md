@@ -95,7 +95,7 @@ pelos dados de seu Banco:
 
 ```xml
 <property name="javax.persistence.jdbc.driver"
-		value="driver_do_seu_banco" />
+		value="driver_jdbc_do_seu_banco" />
 <property name="javax.persistence.jdbc.url"
 		value="url_do_seu_banco" />
 <property name="javax.persistence.jdbc.user"
