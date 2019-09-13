@@ -22,6 +22,7 @@
 #**		*##end
 #**	*##end
 #***##end
+
 ## Gerar PK
 #***##foreach($schema in $schemas)
 #set ($boolSchema = (!$catalog.getTables($schema).isEmpty())&&(!$schema.getFullName().contains("COPY"))&&(!$schema.getFullName().equalsIgnoreCase("information_schema"))&&(!$schema.getFullName().equalsIgnoreCase("sys"))&&(!$schema.getFullName().equalsIgnoreCase("phpmyadmin")))
@@ -45,10 +46,11 @@ REFERENCES $mapaFKs.get($ref).getPrimaryKeyColumn().getParent() ($mapaFKs.get($r
 ON UPDATE no action
 ON DELETE no action
 ;
-#***##
+#***##end
 
 ## Gerar Inserts
 #***##foreach($registro in $mapaInsert.keySet())
 INSERT INTO $registro VALUES
 $mapaInsert.get($registro)
 ;
+#***##end
