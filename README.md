@@ -1,4 +1,8 @@
 # dbclone
+
+Projeto para estudo do SchemaCrawler. Gera a DDL de um banco existente, com a finalidade de migração entre bancos.
+
+Foi testado apenas com MySQL e PostgreSQL.
 ## REQUISITOS DO PROJETO
 1. Enxergar os schemas do banco de dados
 2. Obter os metadados do banco
