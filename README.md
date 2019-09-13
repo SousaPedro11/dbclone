@@ -14,9 +14,6 @@
 
 4. TestNG
 
-5. ObjectAid UM Explorer
-
-
 ### INSTALAÇÃO DOS RECURSOS UTILIZADOS
 #### Java, Eclipse e Maven
 * Baixe o Eclipse EE, Java e Maven
