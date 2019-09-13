@@ -28,6 +28,7 @@ public class Banco {
             // Adiciona ao contexto do template
             context.put("mapaFKs", Utilitario.obterFKs());
             context.put("catalog", Utilitario.obterCatalogo());
+            context.put("mapaInsert", Utilitario.obterDados());
             // adiciona o template ao Writer
             t.merge(context, writer);
             final BufferedWriter sqlfile = new BufferedWriter(new FileWriter("banco.sql", false));

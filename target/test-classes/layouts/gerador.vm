@@ -45,4 +45,10 @@ REFERENCES $mapaFKs.get($ref).getPrimaryKeyColumn().getParent() ($mapaFKs.get($r
 ON UPDATE no action
 ON DELETE no action
 ;
-#***##end
+#***##
+
+## Gerar Inserts
+#***##foreach($registro in $mapaInsert.keySet())
+INSERT INTO $registro VALUES
+$mapaInsert.get($registro)
+;
