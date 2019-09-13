@@ -1,12 +1,14 @@
 # dbclone
 
-Projeto para estudo do SchemaCrawler. Gera a DDL de um banco existente, com a finalidade de migração entre bancos.
+Projeto para estudo do SchemaCrawler. Gera a DDL e DML de um banco existente, com a finalidade de migração entre bancos diferentes.
 
 Foi testado apenas com MySQL e PostgreSQL.
 ## REQUISITOS DO PROJETO
 1. Enxergar os schemas do banco de dados
 2. Obter os metadados do banco
 3. Criar DDL a partir de um template (Apache Velocity), utilizando os metadados obtidos do banco (com SchemaCrawler)
+4. Criar DML utilizando o SchemaCrawlerUtility e Apache Velocity
+5. Gerar o "banco.sql"
 
 ## RECURSOS UTILIZADOS
 
