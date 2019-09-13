@@ -81,7 +81,7 @@ Caso ocorra erro com as configurações do Maven no Eclipse ao iniciar , use as se
 ## UTILIZAÇÃO
 1. Modifique o arquivo [persistence.xml](./src/test/resources/META-INF/persistence.xml) substituindo:
 
-```xml
+	```xml
 <property name="javax.persistence.jdbc.driver"
 		value="com.mysql.jdbc.Driver" />
 <property name="javax.persistence.jdbc.url"
@@ -93,7 +93,7 @@ Caso ocorra erro com as configurações do Maven no Eclipse ao iniciar , use as se
 ```
 pelos dados de seu Banco:
 
-```xml
+	```xml
 <property name="javax.persistence.jdbc.driver"
 		value="driver_do_seu_banco" />
 <property name="javax.persistence.jdbc.url"
