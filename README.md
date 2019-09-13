@@ -6,7 +6,7 @@ Foi testado apenas com MySQL e PostgreSQL.
 ## REQUISITOS DO PROJETO
 1. Enxergar os schemas do banco de dados
 2. Obter os metadados do banco
-3. Criar DDL a partir de um template, utilizando os metadados obtidos do banco
+3. Criar DDL a partir de um template (Apache Velocity), utilizando os metadados obtidos do banco (com SchemaCrawler)
 
 ## RECURSOS UTILIZADOS
 
@@ -89,3 +89,7 @@ Caso ocorra erro com as configurações do Maven no Eclipse ao iniciar , use as se
 [Maven Repository](https://mvnrepository.com/)
 
 [TutorialsPoint Maven Config](https://www.tutorialspoint.com/maven/maven_environment_setup.htm)
+
+[SchemaCrawler](https://www.schemacrawler.com/)
+
+[Apache Velocity](https://velocity.apache.org/)
