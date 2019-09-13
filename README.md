@@ -78,6 +78,9 @@ Caso ocorra erro com as configurações do Maven no Eclipse ao iniciar , use as se
 	2. Selecione User Settings e em global settings coloque o caminho correto para o arquivo settings.xml do Maven (ex: C:\desenvolvimento\builds\apache-maven-3.5.0\conf\settings.xml)
 
 
+## UTILIZAÇÃO
+1. Modifique o arquivo [persistence.xml](./src/test/resources/META-INF/persistence.xml)
+
 ## LINKS EXTERNOS
 
 [Eclipse EE](https://www.eclipse.org/downloads/packages/release/2019-06/r/eclipse-ide-enterprise-java-developers)
