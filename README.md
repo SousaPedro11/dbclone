@@ -82,12 +82,26 @@ Caso ocorra erro com as configurações do Maven no Eclipse ao iniciar , use as se
 1. Modifique o arquivo [persistence.xml](./src/test/resources/META-INF/persistence.xml) substituindo:
 
 ```xml
-			<property name="javax.persistence.jdbc.url"
-				value="jdbc:mysql://localhost:3306/" />
-			<property name="javax.persistence.jdbc.user"
-				value="iec_desenv" />
-			<property name="javax.persistence.jdbc.password"
-				value="iec_desenv" />
+<property name="javax.persistence.jdbc.driver"
+		value="com.mysql.jdbc.Driver" />
+<property name="javax.persistence.jdbc.url"
+		value="jdbc:mysql://localhost:3306/" />
+<property name="javax.persistence.jdbc.user"
+		value="iec_desenv" />
+<property name="javax.persistence.jdbc.password"
+		value="iec_desenv" />
+```
+pelos dados de seu Banco:
+
+```xml
+<property name="javax.persistence.jdbc.driver"
+		value="driver_do_seu_banco" />
+<property name="javax.persistence.jdbc.url"
+		value="url_do_seu_banco" />
+<property name="javax.persistence.jdbc.user"
+		value="usuario_do_banco" />
+<property name="javax.persistence.jdbc.password"
+		value="senha_do_banco" />
 ```
 
 ## LINKS EXTERNOS
