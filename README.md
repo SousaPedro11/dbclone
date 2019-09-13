@@ -79,7 +79,16 @@ Caso ocorra erro com as configurações do Maven no Eclipse ao iniciar , use as se
 
 
 ## UTILIZAÇÃO
-1. Modifique o arquivo [persistence.xml](./src/test/resources/META-INF/persistence.xml)
+1. Modifique o arquivo [persistence.xml](./src/test/resources/META-INF/persistence.xml) substituindo:
+
+```xml
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:mysql://localhost:3306/" />
+			<property name="javax.persistence.jdbc.user"
+				value="iec_desenv" />
+			<property name="javax.persistence.jdbc.password"
+				value="iec_desenv" />
+```
 
 ## LINKS EXTERNOS
 
