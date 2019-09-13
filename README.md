@@ -6,7 +6,7 @@ Foi testado apenas com MySQL e PostgreSQL.
 ## REQUISITOS DO PROJETO
 1. Enxergar os schemas do banco de dados
 2. Obter os metadados do banco
-3. Criar DDL a partir de um teplate, utilizando os metadados obtidos do banco
+3. Criar DDL a partir de um template, utilizando os metadados obtidos do banco
 
 ## RECURSOS UTILIZADOS
 
@@ -46,7 +46,7 @@ Foi testado apenas com MySQL e PostgreSQL.
 ### CONFIGURAÇÃO DO AMBIENTE
 
 * É necessário criar variáveis de sistema e amiente, para ter acesso a essas configuraçães:
- Win(janelinha)+Pause Break -> Configurações Avançadas do Sistema -> Variáveis de Ambiente
+Win(<img src="https://cdn.icon-icons.com/icons2/813/PNG/512/windows-10_icon-icons.com_66166.png"  width="15" height="15">)+Pause Break -> Configurações Avançadas do Sistema -> Variáveis de Ambiente
  
 * Crie ou edite a Variável de Usuário Path adicionando o caminho para \bin do Java JDK (ex: C:\Program Files\Java\jdk1.8.0_221\bin)
 
@@ -64,7 +64,7 @@ Foi testado apenas com MySQL e PostgreSQL.
 
 * Agora devemos testar se funcionou
 
-* Pressione Win(janelinha)+R , digite cmd e aperte enter para abrir o Prompt
+* Pressione Win(<img src="https://cdn.icon-icons.com/icons2/813/PNG/512/windows-10_icon-icons.com_66166.png"  width="15" height="15">)+R , digite cmd e aperte enter para abrir o Prompt
 
 * No CMD digite mvn -version e aperte enter
 
