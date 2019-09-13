@@ -1,7 +1,8 @@
 ## Obtem Schemas
 #set ($schemas = $catalog.getSchemas())
 #***##foreach($schema in $schemas)
-#**	*##if((!$catalog.getTables($schema).isEmpty())&&(!$schema.getFullName().contains("COPY")))
+#set ($boolSchema = (!$catalog.getTables($schema).isEmpty())&&(!$schema.getFullName().contains("COPY"))&&(!$schema.getFullName().equalsIgnoreCase("information_schema"))&&(!$schema.getFullName().equalsIgnoreCase("sys"))&&(!$schema.getFullName().equalsIgnoreCase("phpmyadmin")))
+#**	*##if($boolSchema)
 ###**		*#CREATE SCHEMA IF NOT EXISTS #**$schema.getCatalogName()COPY.*#$schema.getFullName()COPY;
 #**		*#CREATE SCHEMA IF NOT EXISTS $schema.getFullName();
 ## Obtem Tabelas
@@ -23,7 +24,8 @@
 #***##end
 ## Gerar PK
 #***##foreach($schema in $schemas)
-#**	*##if((!$catalog.getTables($schema).isEmpty())&&(!$schema.getFullName().contains("COPY")))
+#set ($boolSchema = (!$catalog.getTables($schema).isEmpty())&&(!$schema.getFullName().contains("COPY"))&&(!$schema.getFullName().equalsIgnoreCase("information_schema"))&&(!$schema.getFullName().equalsIgnoreCase("sys"))&&(!$schema.getFullName().equalsIgnoreCase("phpmyadmin")))
+#**	*##if($boolSchema)
 ## Obtem Tabelas
 #**		*##foreach($table in $catalog.getTables($schema))
 #**			*##if($table.hasPrimaryKey())

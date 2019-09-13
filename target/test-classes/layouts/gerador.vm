@@ -1,7 +1,7 @@
 ## Obtem Schemas
 #set ($schemas = $catalog.getSchemas())
 #***##foreach($schema in $schemas)
-#**	*##if((!$catalog.getTables($schema).isEmpty())&&(!$schema.getFullName().contains("COPY")))
+#**	*##if((!$catalog.getTables($schema).isEmpty())&&(!$schema.getFullName().contains("COPY"))&&(!$schema.getFullName().equalsIgnoreCase("information_schema")))
 ###**		*#CREATE SCHEMA IF NOT EXISTS #**$schema.getCatalogName()COPY.*#$schema.getFullName()COPY;
 #**		*#CREATE SCHEMA IF NOT EXISTS $schema.getFullName();
 ## Obtem Tabelas
