@@ -63,15 +63,8 @@ public class TesteSQL {
     }
 
     @Test(enabled = !TesteSQL.DESABILITADO)
-    private void obterTabelas() {
+    private void obterTabelas() throws SchemaCrawlerException {
 
-        try {
-
-            for (final Schema schema : Banco.obterSchemas()) {
-                System.out.println(schema.getFullName());
-            }
-        } catch (final SchemaCrawlerException e) {
-            e.printStackTrace();
-        }
+        Banco.obterTabelas(null);
     }
 }
