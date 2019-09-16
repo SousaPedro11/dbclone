@@ -97,7 +97,7 @@ public final class Utilitario {
                         && (tabela.getPrimaryKey().getColumns().size() > 1);
     }
 
-    private static SchemaCrawlerOptions obterOptions() {
+    public static SchemaCrawlerOptions obterOptions() {
 
         final SchemaCrawlerOptions options = new SchemaCrawlerOptions();
         options.setSchemaInfoLevel(SchemaInfoLevelBuilder.detailed());

@@ -5,7 +5,7 @@
     <classes>
       <class name="br.gov.pa.ufpa.velocity.teste.TesteSQL">
         <methods>
-          <include name="TesteGerarSQL"/>
+          <include name="obterBase"/>
         </methods>
       </class> <!-- br.gov.pa.ufpa.velocity.teste.TesteSQL -->
     </classes>

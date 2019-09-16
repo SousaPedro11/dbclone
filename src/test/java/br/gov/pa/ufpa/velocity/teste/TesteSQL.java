@@ -6,12 +6,14 @@ import org.testng.annotations.Test;
 
 import br.gov.pa.ufpa.velocity.Banco;
 import br.gov.pa.ufpa.velocity.Utilitario;
+import schemacrawler.schema.Schema;
+import schemacrawler.schemacrawler.SchemaCrawlerException;
 
 public class TesteSQL {
 
     private static final boolean DESABILITADO = false;
 
-    @Test(enabled = !TesteSQL.DESABILITADO)
+    @Test(enabled = TesteSQL.DESABILITADO)
     private void TesteGerarSQL() {
 
         try {
@@ -25,5 +27,51 @@ public class TesteSQL {
     private void obterDados() {
 
         Utilitario.obterDados();
+    }
+
+    @Test(enabled = TesteSQL.DESABILITADO)
+    private void obterBanco() {
+
+        try {
+            System.out.println(Banco.obterTipoBanco());
+        } catch (final SchemaCrawlerException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test(enabled = TesteSQL.DESABILITADO)
+    private void obterBase() {
+
+        try {
+            System.out.println(Banco.obterBase());
+        } catch (final SchemaCrawlerException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test(enabled = TesteSQL.DESABILITADO)
+    private void obterSchemas() {
+
+        try {
+
+            for (final Schema schema : Banco.obterSchemas()) {
+                System.out.println(schema.getFullName());
+            }
+        } catch (final SchemaCrawlerException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test(enabled = !TesteSQL.DESABILITADO)
+    private void obterTabelas() {
+
+        try {
+
+            for (final Schema schema : Banco.obterSchemas()) {
+                System.out.println(schema.getFullName());
+            }
+        } catch (final SchemaCrawlerException e) {
+            e.printStackTrace();
+        }
     }
 }

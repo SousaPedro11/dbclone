@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" ignored="1" total="2" passed="1">
+<testng-results skipped="0" failed="0" ignored="4" total="5" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="7617" started-at="2019-09-13T17:44:57Z" finished-at="2019-09-13T17:45:04Z">
+  <suite name="Default suite" duration-ms="3616" started-at="2019-09-16T17:55:13Z" finished-at="2019-09-16T17:55:17Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="7617" started-at="2019-09-13T17:44:57Z" finished-at="2019-09-13T17:45:04Z">
+    <test name="Default test" duration-ms="3616" started-at="2019-09-16T17:55:13Z" finished-at="2019-09-16T17:55:17Z">
       <class name="br.gov.pa.ufpa.velocity.teste.TesteSQL">
-        <test-method status="PASS" signature="TesteGerarSQL()[pri:0, instance:br.gov.pa.ufpa.velocity.teste.TesteSQL@5c3bd550]" name="TesteGerarSQL" duration-ms="7595" started-at="2019-09-13T17:44:57Z" finished-at="2019-09-13T17:45:04Z">
+        <test-method status="PASS" signature="obterSchemas()[pri:0, instance:br.gov.pa.ufpa.velocity.teste.TesteSQL@6a41eaa2]" name="obterSchemas" duration-ms="3594" started-at="2019-09-16T17:55:13Z" finished-at="2019-09-16T17:55:17Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- TesteGerarSQL -->
+        </test-method> <!-- obterSchemas -->
       </class> <!-- br.gov.pa.ufpa.velocity.teste.TesteSQL -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->

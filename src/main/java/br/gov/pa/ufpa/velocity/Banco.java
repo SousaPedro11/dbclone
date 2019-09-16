@@ -5,10 +5,16 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.sql.Connection;
+import java.util.LinkedHashSet;
+import java.util.stream.Collectors;
 
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
+
+import schemacrawler.schema.Schema;
+import schemacrawler.schemacrawler.SchemaCrawlerException;
+import schemacrawler.utility.SchemaCrawlerUtility;
 
 public class Banco {
 
@@ -40,22 +46,34 @@ public class Banco {
         }
     }
 
-    private void obterTipoBanco() {
-        // TODO Auto-generated method stub
+    public static String obterTipoBanco() throws SchemaCrawlerException {
+
+        return SchemaCrawlerUtility.getCatalog(SingletonConexao.getConexao(), Utilitario.obterOptions())
+                        .getDatabaseInfo()
+                        .getProductName();
+    }
+
+    public static String obterBase() throws SchemaCrawlerException {
+
+        final String[] nomeBase = SchemaCrawlerUtility.getCatalog(SingletonConexao.getConexao(), Utilitario.obterOptions())
+                        .getJdbcDriverInfo()
+                        .getConnectionUrl()
+                        .split("/");
+
+        return nomeBase[nomeBase.length - 1];
+    }
+
+    public static LinkedHashSet<Schema> obterSchemas() throws SchemaCrawlerException {
+
+        return SchemaCrawlerUtility.getCatalog(SingletonConexao.getConexao(), Utilitario.obterOptions())
+                        .getSchemas()
+                        .stream()
+                        .filter(f -> !f.getFullName().matches("(sys)||(information_schema)||(phpmyadmin)||(performance_schema)||(mysql)"))
+                        .collect(Collectors.toCollection(LinkedHashSet::new));
 
     }
 
-    private void obterBase() {
-        // TODO Auto-generated method stub
-
-    }
-
-    private void obterSchema() {
-        // TODO Auto-generated method stub
-
-    }
-
-    private void obterTabela() {
+    public static void obterTabelas(final Schema schema) {
         // TODO Auto-generated method stub
 
     }
