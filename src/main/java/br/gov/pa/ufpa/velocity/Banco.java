@@ -40,4 +40,33 @@ public class Banco {
         }
     }
 
+    private void obterTipoBanco() {
+        // TODO Auto-generated method stub
+
+    }
+
+    private void obterBase() {
+        // TODO Auto-generated method stub
+
+    }
+
+    private void obterSchema() {
+        // TODO Auto-generated method stub
+
+    }
+
+    private void obterTabela() {
+        // TODO Auto-generated method stub
+
+    }
+
+    private void obterColuna() {
+        // TODO Auto-generated method stub
+
+    }
+
+    private void obterRegistro() {
+        // TODO Auto-generated method stub
+
+    }
 }
