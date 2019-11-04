@@ -4,7 +4,6 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringWriter;
-import java.sql.Connection;
 import java.util.LinkedHashSet;
 import java.util.stream.Collectors;
 
@@ -12,14 +11,9 @@ import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 
-import schemacrawler.schema.Catalog;
 import schemacrawler.schema.Schema;
-import schemacrawler.schemacrawler.SchemaCrawlerException;
-import schemacrawler.utility.SchemaCrawlerUtility;
 
 public class Banco {
-
-    private static Connection conexao = SingletonConexao.getConexao();
 
     public static void velocityGerador() throws IOException {
 
@@ -34,7 +28,7 @@ public class Banco {
         try {
             // Adiciona ao contexto do template
             context.put("mapaFKs", Utilitario.obterFKs());
-            context.put("catalog", Utilitario.obterCatalogo());
+            context.put("catalog", Utilitario.catalogo);
             context.put("mapaInsert", Utilitario.obterDados());
             // adiciona o template ao Writer
             t.merge(context, writer);
@@ -47,17 +41,16 @@ public class Banco {
         }
     }
 
-    public static String obterTipoBanco() throws SchemaCrawlerException {
+    public static String obterTipoBanco() {
 
-        Catalog catalog = SchemaCrawlerUtility.getCatalog(SingletonConexao.getConexao(), Utilitario.obterOptions());
-        return catalog
+        return Utilitario.catalogo
                         .getDatabaseInfo()
                         .getProductName();
     }
 
-    public static String obterBase() throws SchemaCrawlerException {
+    public static String obterBase() {
 
-        final String[] nomeBase = SchemaCrawlerUtility.getCatalog(SingletonConexao.getConexao(), Utilitario.obterOptions())
+        final String[] nomeBase = Utilitario.catalogo
                         .getJdbcDriverInfo()
                         .getConnectionUrl()
                         .split("/");
@@ -65,9 +58,9 @@ public class Banco {
         return nomeBase[nomeBase.length - 1];
     }
 
-    public static LinkedHashSet<Schema> obterSchemas() throws SchemaCrawlerException {
+    public static LinkedHashSet<Schema> obterSchemas() {
 
-        return SchemaCrawlerUtility.getCatalog(SingletonConexao.getConexao(), Utilitario.obterOptions())
+        return Utilitario.catalogo
                         .getSchemas()
                         .stream()
                         .filter(f -> !f.getFullName().matches("(sys)||(information_schema)||(phpmyadmin)||(performance_schema)||(mysql)"))

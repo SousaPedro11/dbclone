@@ -28,6 +28,8 @@ import schemacrawler.utility.SchemaCrawlerUtility;
 
 public final class Utilitario {
 
+    public static Catalog catalogo = Utilitario.obterCatalogo();
+
     private Utilitario() {
 
     }
@@ -106,41 +108,38 @@ public final class Utilitario {
         return options;
     }
 
-    public static Catalog obterCatalogo() throws SchemaCrawlerException {
+    public static Catalog obterCatalogo() {
 
-        // TODO Adicionar filtro
+        Catalog catalog = null;
         final Connection conexao = SingletonConexao.getConexao();
-        return SchemaCrawlerUtility.getCatalog(conexao, Utilitario.obterOptions());
+        try {
+            catalog = SchemaCrawlerUtility.getCatalog(conexao, Utilitario.obterOptions());
+        } catch (final SchemaCrawlerException e) {
+            e.printStackTrace();
+        }
+        return catalog;
     }
 
     public static Map<ForeignKey, ForeignKeyColumnReference> obterFKs() {
 
         final Map<ForeignKey, ForeignKeyColumnReference> mapaFK = new LinkedHashMap<>();
 
-        try {
+        final Collection<Table> tables = Utilitario.catalogo.getTables().stream()
+                        .sorted(Comparator.comparing(Table::getSchema)
+                                        .thenComparing(Table::getName))
+                        .collect(Collectors.toList());
 
-            final Catalog catalogo = Utilitario.obterCatalogo();
-
-            final Collection<Table> tables = catalogo.getTables().stream()
-                            .sorted(Comparator.comparing(Table::getSchema)
-                                            .thenComparing(Table::getName))
-                            .collect(Collectors.toList());
-
-            for (final Table tabela : tables) {
-                // System.out.println(tabela.getName());
-                final Collection<ForeignKey> importedForeignKeys = tabela.getImportedForeignKeys();
-                for (final ForeignKey importedFK : importedForeignKeys) {
-                    final List<ForeignKeyColumnReference> columnReferences = importedFK.getColumnReferences();
-                    for (final ForeignKeyColumnReference FKCR : columnReferences) {
-                        mapaFK.put(importedFK, FKCR);
-                        // System.out.println(importedFK + "\t" + FKCR);
-                    }
+        for (final Table tabela : tables) {
+            // System.out.println(tabela.getName());
+            final Collection<ForeignKey> importedForeignKeys = tabela.getImportedForeignKeys();
+            for (final ForeignKey importedFK : importedForeignKeys) {
+                final List<ForeignKeyColumnReference> columnReferences = importedFK.getColumnReferences();
+                for (final ForeignKeyColumnReference FKCR : columnReferences) {
+                    mapaFK.put(importedFK, FKCR);
+                    // System.out.println(importedFK + "\t" + FKCR);
                 }
-                // System.out.println();
             }
-
-        } catch (final SchemaCrawlerException e) {
-            e.printStackTrace();
+            // System.out.println();
         }
 
         return mapaFK;
@@ -148,15 +147,12 @@ public final class Utilitario {
 
     public static Map<String, String> obterDados() {
 
-        Catalog catalogo;
         Map<String, String> mapa = null;
         try {
 
             mapa = new LinkedHashMap<>();
 
-            catalogo = Utilitario.obterCatalogo();
-
-            final Collection<Table> tables = catalogo.getTables().stream()
+            final Collection<Table> tables = Utilitario.catalogo.getTables().stream()
                             .sorted(Comparator.comparing(Table::getSchema))
                             .collect(Collectors.toList());
 

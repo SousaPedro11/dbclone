@@ -14,7 +14,7 @@ public class TesteSQL {
 
     private static final boolean DESABILITADO = false;
 
-    @Test(enabled = TesteSQL.DESABILITADO)
+    @Test(enabled = !TesteSQL.DESABILITADO)
     private void TesteGerarSQL() {
 
         try {
@@ -33,40 +33,25 @@ public class TesteSQL {
     @Test(enabled = TesteSQL.DESABILITADO)
     private void obterBanco() {
 
-        try {
-            System.out.println(Banco.obterTipoBanco());
-        } catch (final SchemaCrawlerException e) {
-            e.printStackTrace();
-        }
+        System.out.println(Banco.obterTipoBanco());
+
+        System.out.println(Utilitario.filtroBanco());
     }
 
     @Test(enabled = TesteSQL.DESABILITADO)
     private void obterBase() {
 
-        try {
-            System.out.println(Banco.obterBase());
-        } catch (final SchemaCrawlerException e) {
-            e.printStackTrace();
-        }
+        System.out.println(Banco.obterBase());
     }
 
-    @Test(enabled = !TesteSQL.DESABILITADO)
+    @Test(enabled = TesteSQL.DESABILITADO)
     private void obterSchemas() {
 
-        try {
-            final Catalog obterCatalogo = Utilitario.obterCatalogo();
-            System.out.println(obterCatalogo);
-        } catch (final SchemaCrawlerException e1) {
-            e1.printStackTrace();
-        }
+        final Catalog obterCatalogo = Utilitario.obterCatalogo();
+        System.out.println(obterCatalogo);
 
-        try {
-
-            for (final Schema schema : Banco.obterSchemas()) {
-                System.out.println(schema.getFullName());
-            }
-        } catch (final SchemaCrawlerException e) {
-            e.printStackTrace();
+        for (final Schema schema : Banco.obterSchemas()) {
+            System.out.println(schema.getFullName());
         }
     }
 
