@@ -10,6 +10,8 @@ import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import org.apache.commons.text.WordUtils;
@@ -20,6 +22,7 @@ import schemacrawler.schema.ForeignKey;
 import schemacrawler.schema.ForeignKeyColumnReference;
 import schemacrawler.schema.ResultsColumn;
 import schemacrawler.schema.ResultsColumns;
+import schemacrawler.schema.Schema;
 import schemacrawler.schema.Table;
 import schemacrawler.schemacrawler.SchemaCrawlerException;
 import schemacrawler.schemacrawler.SchemaCrawlerOptions;
@@ -29,6 +32,8 @@ import schemacrawler.utility.SchemaCrawlerUtility;
 public final class Utilitario {
 
     public static Catalog catalogo = Utilitario.obterCatalogo();
+
+    private static Collection<Table> tables = Utilitario.filtroBanco();
 
     private Utilitario() {
 
@@ -124,7 +129,7 @@ public final class Utilitario {
 
         final Map<ForeignKey, ForeignKeyColumnReference> mapaFK = new LinkedHashMap<>();
 
-        final Collection<Table> tables = Utilitario.catalogo.getTables().stream()
+        final Collection<Table> tables = Utilitario.tables.stream()
                         .sorted(Comparator.comparing(Table::getSchema)
                                         .thenComparing(Table::getName))
                         .collect(Collectors.toList());
@@ -152,7 +157,7 @@ public final class Utilitario {
 
             mapa = new LinkedHashMap<>();
 
-            final Collection<Table> tables = Utilitario.catalogo.getTables().stream()
+            final Collection<Table> tables = Utilitario.tables.stream()
                             .sorted(Comparator.comparing(Table::getSchema))
                             .collect(Collectors.toList());
 
@@ -242,5 +247,37 @@ public final class Utilitario {
         }
         return mapa;
 
+    }
+
+    private static Collection<Table> filtroBanco() {
+
+        Collection<Table> resultado = null;
+
+        final String tipoBanco = Banco.obterTipoBanco();
+        if (tipoBanco.matches("[mysqlMYSQL]+")) {
+
+            List<Schema> schemas = new ArrayList<>();
+
+            final String schema = Utilitario.catalogo.getJdbcDriverInfo().getConnectionUrl();
+
+            final String regex = "\\d\\/+\\w+";
+
+            final Matcher matcher = Pattern.compile(regex).matcher(schema);
+
+            while (matcher.find()) {
+                final String nomeSchema = matcher.group().replaceAll("[\\d\\/]", "");
+
+                schemas = Utilitario.catalogo.getSchemas().stream().filter(s -> s.getFullName().equalsIgnoreCase(nomeSchema))
+                                .collect(Collectors.toList());
+            }
+
+            resultado = Utilitario.catalogo.getTables(schemas.get(0));
+
+        } else {
+
+            resultado = Utilitario.catalogo.getTables();
+        }
+
+        return resultado;
     }
 }

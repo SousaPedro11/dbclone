@@ -1,5 +1,4 @@
 ## Obtem Schemas
-#set ($schemas = $catalog.getSchemas())
 #***##foreach($schema in $schemas)
 #set ($boolSchema = (!$catalog.getTables($schema).isEmpty())&&(!$schema.getFullName().contains("COPY"))&&(!$schema.getFullName().equalsIgnoreCase("information_schema"))&&(!$schema.getFullName().equalsIgnoreCase("sys"))&&(!$schema.getFullName().equalsIgnoreCase("phpmyadmin")))
 #**	*##if($boolSchema)

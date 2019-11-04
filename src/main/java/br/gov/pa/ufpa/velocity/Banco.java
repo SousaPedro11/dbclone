@@ -4,7 +4,11 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import org.apache.velocity.Template;
@@ -27,9 +31,7 @@ public class Banco {
         final StringWriter writer = new StringWriter();
         try {
             // Adiciona ao contexto do template
-            context.put("mapaFKs", Utilitario.obterFKs());
-            context.put("catalog", Utilitario.catalogo);
-            context.put("mapaInsert", Utilitario.obterDados());
+            Banco.addContext(context);
             // adiciona o template ao Writer
             t.merge(context, writer);
             final BufferedWriter sqlfile = new BufferedWriter(new FileWriter("banco.sql", false));
@@ -81,5 +83,38 @@ public class Banco {
     private void obterRegistro() {
         // TODO Auto-generated method stub
 
+    }
+
+    private static void addContext(final VelocityContext context) {
+
+        context.put("mapaFKs", Utilitario.obterFKs());
+        context.put("catalog", Utilitario.catalogo);
+        context.put("mapaInsert", Utilitario.obterDados());
+
+        final String tipoBanco = Banco.obterTipoBanco();
+        if (tipoBanco.matches("[mysqlMYSQL]+")) {
+
+            List<Schema> schemas = new ArrayList<>();
+
+            final String schema = Utilitario.catalogo.getJdbcDriverInfo().getConnectionUrl();
+
+            final String regex = "\\d\\/+\\w+";
+
+            final Matcher matcher = Pattern.compile(regex).matcher(schema);
+
+            while (matcher.find()) {
+                final String nomeSchema = matcher.group().replaceAll("[\\d\\/]", "");
+
+                schemas = Utilitario.catalogo.getSchemas().stream().filter(s -> s.getFullName().equalsIgnoreCase(nomeSchema))
+                                .collect(Collectors.toList());
+            }
+
+            // System.out.println(schemas);
+            context.put("schemas", schemas);
+
+        } else {
+
+            context.put("schemas", Utilitario.catalogo.getSchemas());
+        }
     }
 }

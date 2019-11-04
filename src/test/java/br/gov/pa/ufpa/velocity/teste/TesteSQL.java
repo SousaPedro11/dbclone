@@ -35,7 +35,6 @@ public class TesteSQL {
 
         System.out.println(Banco.obterTipoBanco());
 
-        System.out.println(Utilitario.filtroBanco());
     }
 
     @Test(enabled = TesteSQL.DESABILITADO)
