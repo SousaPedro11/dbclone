@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 
 import br.gov.pa.ufpa.velocity.Banco;
 import br.gov.pa.ufpa.velocity.Utilitario;
+import schemacrawler.schema.Catalog;
 import schemacrawler.schema.Schema;
 import schemacrawler.schemacrawler.SchemaCrawlerException;
 
@@ -49,8 +50,15 @@ public class TesteSQL {
         }
     }
 
-    @Test(enabled = TesteSQL.DESABILITADO)
+    @Test(enabled = !TesteSQL.DESABILITADO)
     private void obterSchemas() {
+
+        try {
+            final Catalog obterCatalogo = Utilitario.obterCatalogo();
+            System.out.println(obterCatalogo);
+        } catch (final SchemaCrawlerException e1) {
+            e1.printStackTrace();
+        }
 
         try {
 
@@ -62,7 +70,7 @@ public class TesteSQL {
         }
     }
 
-    @Test(enabled = !TesteSQL.DESABILITADO)
+    @Test(enabled = TesteSQL.DESABILITADO)
     private void obterTabelas() throws SchemaCrawlerException {
 
         Banco.obterTabelas(null);

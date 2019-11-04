@@ -1,5 +1,6 @@
 package br.gov.pa.ufpa.velocity;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -107,7 +108,9 @@ public final class Utilitario {
 
     public static Catalog obterCatalogo() throws SchemaCrawlerException {
 
-        return SchemaCrawlerUtility.getCatalog(SingletonConexao.getConexao(), Utilitario.obterOptions());
+        // TODO Adicionar filtro
+        final Connection conexao = SingletonConexao.getConexao();
+        return SchemaCrawlerUtility.getCatalog(conexao, Utilitario.obterOptions());
     }
 
     public static Map<ForeignKey, ForeignKeyColumnReference> obterFKs() {

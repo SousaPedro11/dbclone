@@ -12,6 +12,7 @@ import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 
+import schemacrawler.schema.Catalog;
 import schemacrawler.schema.Schema;
 import schemacrawler.schemacrawler.SchemaCrawlerException;
 import schemacrawler.utility.SchemaCrawlerUtility;
@@ -48,7 +49,8 @@ public class Banco {
 
     public static String obterTipoBanco() throws SchemaCrawlerException {
 
-        return SchemaCrawlerUtility.getCatalog(SingletonConexao.getConexao(), Utilitario.obterOptions())
+        Catalog catalog = SchemaCrawlerUtility.getCatalog(SingletonConexao.getConexao(), Utilitario.obterOptions());
+        return catalog
                         .getDatabaseInfo()
                         .getProductName();
     }

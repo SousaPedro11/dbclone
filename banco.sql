@@ -189,6 +189,62 @@ nacionalidade VARCHAR (20),
 id INT AUTO_INCREMENT NOT NULL
 );
 
+CREATE SCHEMA IF NOT EXISTS consultorio;
+CREATE TABLE IF NOT EXISTS consultorio.medico(
+id INT AUTO_INCREMENT NOT NULL,
+nome VARCHAR (45),
+endereco VARCHAR (45),
+telefone VARCHAR (45),
+crm VARCHAR (45)
+);
+
+CREATE TABLE IF NOT EXISTS consultorio.paciente(
+id INT AUTO_INCREMENT NOT NULL,
+nome VARCHAR (45),
+endereco VARCHAR (45),
+tel VARCHAR (45),
+cpf VARCHAR (45)
+);
+
+CREATE TABLE IF NOT EXISTS consultorio.secretaria(
+id INT AUTO_INCREMENT NOT NULL,
+nome VARCHAR (45),
+endereco VARCHAR (45),
+telefone VARCHAR (45),
+cpf VARCHAR (45)
+);
+
+CREATE TABLE IF NOT EXISTS consultorio.consulta(
+id INT AUTO_INCREMENT NOT NULL,
+data_cons DATE,
+medico_id INT,
+paciente_id INT,
+secretaria_id INT,
+valor DECIMAL,
+pago BIT
+);
+
+CREATE SCHEMA IF NOT EXISTS curso_sql;
+CREATE TABLE IF NOT EXISTS curso_sql.funcionarios(
+id INT UNSIGNED AUTO_INCREMENT NOT NULL,
+nome VARCHAR (45) NOT NULL,
+salario DOUBLE NOT NULL,
+departamento VARCHAR (45) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS curso_sql.salarios(
+faixa VARCHAR (45) NOT NULL,
+inicio DOUBLE NOT NULL,
+fim DOUBLE NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS curso_sql.veiculos(
+id INT UNSIGNED AUTO_INCREMENT NOT NULL,
+funcionario_id INT UNSIGNED,
+veiculo VARCHAR (45) NOT NULL,
+placa VARCHAR (10) NOT NULL
+);
+
 CREATE SCHEMA IF NOT EXISTS evento;
 CREATE TABLE IF NOT EXISTS evento.evento(
 codigo BIGINT AUTO_INCREMENT NOT NULL,
@@ -210,6 +266,14 @@ senha VARCHAR (255)
 CREATE TABLE IF NOT EXISTS evento.users_roles(
 users_nome VARCHAR (255) NOT NULL,
 roles_nome_role VARCHAR (255) NOT NULL
+);
+
+CREATE SCHEMA IF NOT EXISTS funcoes;
+CREATE TABLE IF NOT EXISTS funcoes.produtos(
+id INT NOT NULL,
+nome VARCHAR (45),
+valor DECIMAL,
+tipo VARCHAR (45)
 );
 
 CREATE SCHEMA IF NOT EXISTS hospital;
@@ -266,6 +330,46 @@ cidade VARCHAR (20),
 departamento_id INT
 );
 
+CREATE SCHEMA IF NOT EXISTS SOFTBLUE;
+CREATE TABLE IF NOT EXISTS SOFTBLUE.INSTRUTOR(
+COD INT AUTO_INCREMENT NOT NULL,
+INSTRUTOR VARCHAR (80) NOT NULL,
+TELEFONE VARCHAR (14) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS SOFTBLUE.TIPO(
+COD INT AUTO_INCREMENT NOT NULL,
+TIPO VARCHAR (32) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS SOFTBLUE.CURSO(
+COD INT AUTO_INCREMENT NOT NULL,
+CURSO VARCHAR (80) NOT NULL,
+TIPO_ID INT NOT NULL,
+INSTRUTOR_ID INT NOT NULL,
+VALOR DOUBLE NOT NULL
+);
+
+CREATE SCHEMA IF NOT EXISTS subquery;
+CREATE TABLE IF NOT EXISTS subquery.cargos(
+id INT NOT NULL,
+descricao VARCHAR (45),
+nivel INT
+);
+
+CREATE TABLE IF NOT EXISTS subquery.departamentos(
+id INT NOT NULL,
+nome VARCHAR (45)
+);
+
+CREATE TABLE IF NOT EXISTS subquery.funcionarios(
+id INT NOT NULL,
+nome VARCHAR (45),
+salario DECIMAL,
+cargo_id INT,
+departamento_id INT
+);
+
 
 ALTER TABLE academia.aparelho
 ADD CONSTRAINT aparelho_pkey PRIMARY KEY (cod);
@@ -313,12 +417,28 @@ ALTER TABLE cadastro.curso
 ADD CONSTRAINT curso_pkey PRIMARY KEY (id);
 ALTER TABLE cadastro.pessoa
 ADD CONSTRAINT pessoa_pkey PRIMARY KEY (id);
+ALTER TABLE consultorio.medico
+ADD CONSTRAINT medico_pkey PRIMARY KEY (id);
+ALTER TABLE consultorio.paciente
+ADD CONSTRAINT paciente_pkey PRIMARY KEY (id);
+ALTER TABLE consultorio.secretaria
+ADD CONSTRAINT secretaria_pkey PRIMARY KEY (id);
+ALTER TABLE consultorio.consulta
+ADD CONSTRAINT consulta_pkey PRIMARY KEY (id);
+ALTER TABLE curso_sql.funcionarios
+ADD CONSTRAINT funcionarios_pkey PRIMARY KEY (id);
+ALTER TABLE curso_sql.salarios
+ADD CONSTRAINT salarios_pkey PRIMARY KEY (faixa);
+ALTER TABLE curso_sql.veiculos
+ADD CONSTRAINT veiculos_pkey PRIMARY KEY (id);
 ALTER TABLE evento.evento
 ADD CONSTRAINT evento_pkey PRIMARY KEY (codigo);
 ALTER TABLE evento.role
 ADD CONSTRAINT role_pkey PRIMARY KEY (nome_role);
 ALTER TABLE evento.users
 ADD CONSTRAINT users_pkey PRIMARY KEY (nome);
+ALTER TABLE funcoes.produtos
+ADD CONSTRAINT produtos_pkey PRIMARY KEY (id);
 ALTER TABLE hospital.medico
 ADD CONSTRAINT medico_pkey PRIMARY KEY (id);
 ALTER TABLE hospital.paciente
@@ -330,6 +450,18 @@ ADD CONSTRAINT consulta_pkey PRIMARY KEY (id);
 ALTER TABLE joins.departamentos
 ADD CONSTRAINT departamentos_pkey PRIMARY KEY (id);
 ALTER TABLE joins.funcionarios
+ADD CONSTRAINT funcionarios_pkey PRIMARY KEY (id);
+ALTER TABLE SOFTBLUE.INSTRUTOR
+ADD CONSTRAINT INSTRUTOR_pkey PRIMARY KEY (COD);
+ALTER TABLE SOFTBLUE.TIPO
+ADD CONSTRAINT TIPO_pkey PRIMARY KEY (COD);
+ALTER TABLE SOFTBLUE.CURSO
+ADD CONSTRAINT CURSO_pkey PRIMARY KEY (COD);
+ALTER TABLE subquery.cargos
+ADD CONSTRAINT cargos_pkey PRIMARY KEY (id);
+ALTER TABLE subquery.departamentos
+ADD CONSTRAINT departamentos_pkey PRIMARY KEY (id);
+ALTER TABLE subquery.funcionarios
 ADD CONSTRAINT funcionarios_pkey PRIMARY KEY (id);
 
 ALTER TABLE academia.aluno
@@ -476,6 +608,30 @@ REFERENCES academia.turma (cod)
 ON UPDATE no action
 ON DELETE no action
 ;
+ALTER TABLE consultorio.consulta
+ADD CONSTRAINT consulta_ibfk_1 FOREIGN KEY (medico_id)
+REFERENCES consultorio.medico (id)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE consultorio.consulta
+ADD CONSTRAINT consulta_ibfk_2 FOREIGN KEY (paciente_id)
+REFERENCES consultorio.paciente (id)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE consultorio.consulta
+ADD CONSTRAINT consulta_ibfk_3 FOREIGN KEY (secretaria_id)
+REFERENCES consultorio.secretaria (id)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE curso_sql.veiculos
+ADD CONSTRAINT FK_veiculos_funcionario FOREIGN KEY (funcionario_id)
+REFERENCES curso_sql.funcionarios (id)
+ON UPDATE no action
+ON DELETE no action
+;
 ALTER TABLE evento.users_roles
 ADD CONSTRAINT FKgv8ypr50e3c06yjjkx76pxupr FOREIGN KEY (roles_nome_role)
 REFERENCES evento.role (nome_role)
@@ -506,35 +662,102 @@ REFERENCES hospital.secretaria (id)
 ON UPDATE no action
 ON DELETE no action
 ;
-ALTER TABLE joins.funcionarios
-ADD CONSTRAINT funcionarios_ibfk_1 FOREIGN KEY (departamento_id)
-REFERENCES joins.departamentos (id)
+ALTER TABLE subquery.funcionarios
+ADD CONSTRAINT funcionarios_ibfk_1 FOREIGN KEY (cargo_id)
+REFERENCES subquery.cargos (id)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE SOFTBLUE.CURSO
+ADD CONSTRAINT FK_CURSO_INSTRUTOR FOREIGN KEY (INSTRUTOR_ID)
+REFERENCES SOFTBLUE.INSTRUTOR (COD)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE SOFTBLUE.CURSO
+ADD CONSTRAINT FK_CURSO_TIPO FOREIGN KEY (TIPO_ID)
+REFERENCES SOFTBLUE.TIPO (COD)
+ON UPDATE no action
+ON DELETE no action
+;
+ALTER TABLE subquery.funcionarios
+ADD CONSTRAINT funcionarios_ibfk_2 FOREIGN KEY (departamento_id)
+REFERENCES subquery.departamentos (id)
 ON UPDATE no action
 ON DELETE no action
 ;
 
 INSERT INTO aula.funcionarios (id, nome, telefone, endereco, bairro, cep, salario, cidade) VALUES
-(1, 'Maria João', '99070012', 'Av. Gov José Malcher, 2460', 'São Braz', '66060281', 1500.8, 'Belém'),
+(1, 'Maria João', '99070012', 'Av. Gov José Malcher, 2460', 'São Bras', '66060281', 1500.8, 'Belém'),
 (2, 'Pedro Zamora', '99989988', 'Av. Magalhães Barata, 1360', 'Nazaré', '66055090', 2300.12, 'Belem'),
 (3, 'Andrea Pinho', '99989988', 'Boaventura da Silva, 678, ap 304', 'Umarizal', '66075080', 4080.5, 'BELEM'),
-(4, 'Mario Silva', '2223234', 'Cidade Nova IV, 3456', 'São Braz', '66060281', 1200.8, 'Ananindeua'),
+(4, 'Mario Silva', '2223234', 'Cidade Nova IV, 3456', 'São Bras', '66060281', 1200.8, 'Ananindeua'),
+(5, 'Felipe Almeida', '99980088', 'Av. Roberto Camelier, 2360', 'Jurunas', '66055090', 9300.72, 'Belem'),
 (6, 'Rafael Bezerra', '99345688', 'Passagem Maxima, 678, ap 304', 'Marco', '66075080', 4080.5, 'BELEM'),
 (7, 'Katia Santos', '98760012', 'Trav Mauriti, 2460', 'Marco', '66060281', 700.8, 'Belém'),
 (8, 'Gustavo Pinto', '22389988', 'Passagem Barata, 1360', 'Cidade Nova IV', '66055090', 2300.12, 'Ananindeua'),
+(9, 'Anderson Marques', '32289988', '40 horas, 678', 'Coqueiro', '66075080', 8900.5, 'Ananindeua'),
 (10, 'Renato Hudson', '34553234', 'Passagem Tereza, 3456', 'Cidade Nova V', '66060281', 1450.8, 'Ananindeua'),
 (11, 'Tiago Alves', '78889988', 'Av. Magalhães Barata, 1360', 'Nazaré', '66055090', 2990.62, 'Belem'),
 (12, 'Mario Antonio', '23489988', 'Boaventura da Silva, 678, ap 304', 'Umarizal', '66075080', 4080.5, 'BELEM'),
-(13, 'Maria Silva', '32470012', 'Av. Gov José Malcher, 2460', 'São Braz', '66060281', 1500.8, 'Belém'),
+(13, 'Maria Silva', '32470012', 'Av. Gov José Malcher, 2460', 'São Bras', '66060281', 1500.8, 'Belém'),
 (14, 'Jean Zorat', '88789988', 'Av. Magalhães Barata, 1360', 'Nazaré', '66055090', 2823.99, 'Belem'),
 (15, 'Andre Ribeiro', '76589988', 'Boaventura da Silva, 678, ap 304', 'Umarizal', '66075080', 3567.5, 'BELEM'),
-(16, 'Matheus Carmo', '87893234', 'Cidade Nova IV, 3456', 'São Braz', '66060281', 1689.9, 'Ananindeua'),
-(17, 'Daniel Dantes', '22989988', 'Av. Magalhães Barata, 1360', 'Nazaré', '66055090', 2800.12, 'Belem')
+(16, 'Matheus Carmo', '87893234', 'Cidade Nova IV, 3456', 'São Bras', '66060281', 1689.9, 'Ananindeua'),
+(17, 'Daniel Dantes', '22989988', 'Av. Magalhães Barata, 1360', 'Nazaré', '66055090', 2800.12, 'Belem'),
+(18, 'Zumira Castro', '99989988', 'Boaventura da Silva, 678, ap 304', 'Umarizal', '66075080', 8080.0, 'BELEM')
 ;
 INSERT INTO cadastro.pessoa (nome, nascimento, sexo, peso, altura, nacionalidade, id) VALUES
 ('Godofredo', '1984-01-01', 'M', 78.50, 1.83, 'Brasil', 1),
 ('Maria', '1999-12-02', 'F', 55.20, 1.65, 'Portugal', 2),
 ('Adalgiza', '1930-11-02', 'F', 63.20, 1.75, 'Irlanda', 3),
 ('Marilia', '1988-11-06', 'F', 88.20, 1.65, 'Irlanda', 4)
+;
+INSERT INTO consultorio.medico (id, nome, endereco, telefone, crm) VALUES
+(1, 'Silas', 'Av AAAA', '99999-9999', '0002'),
+(2, 'Mario', 'Av bbb', '99999-9999', '0003'),
+(3, 'Antonio', 'Av cccc', '99999-9999', '0010'),
+(4, 'Campos', 'Av ddd', '99999-9999', '0015'),
+(5, 'Jose', 'Av www', '99999-9999', '0020')
+;
+INSERT INTO consultorio.paciente (id, nome, endereco, tel, cpf) VALUES
+(1, 'AAAA', 'Av AAAA', '00000-0000', '11111111111'),
+(2, 'BBBB', 'Av BBBB', '00000-0000', '22222222222'),
+(3, 'CCCC', 'Av CCCC', '00000-0000', '33333333333'),
+(4, 'DDDD', 'Av DDDD', '00000-0000', '44444444444'),
+(5, 'EEEE', 'Av EEEE', '00000-0000', '55555555555')
+;
+INSERT INTO consultorio.secretaria (id, nome, endereco, telefone, cpf) VALUES
+(1, 'sec1', 'Av AAAA', '00000-0000', '11111111111'),
+(2, 'sec2', 'Av BBBB', '00000-0000', '22222222222'),
+(3, 'sec3', 'Av CCCC', '00000-0000', '33333333333'),
+(4, 'sec4', 'Av DDDD', '00000-0000', '44444444444'),
+(5, 'sec5', 'Av EEEE', '00000-0000', '55555555555')
+;
+INSERT INTO consultorio.consulta (id, data_cons, medico_id, paciente_id, secretaria_id, valor, pago) VALUES
+(1, '2017-03-13', 1, 2, 3, 100.00, 'true'),
+(2, '2017-03-14', 5, 3, 4, 120.00, 'true'),
+(3, '2017-03-15', 2, 4, 5, 150.00, 'true'),
+(4, '2017-03-16', 4, 5, 2, 180.00, 'true'),
+(5, '2017-03-19', 3, 1, 1, 200.00, 'true')
+;
+INSERT INTO curso_sql.funcionarios (id, nome, salario, departamento) VALUES
+(1, 'Fernando', 1400.0, 'TI'),
+(2, 'Guilherme', 2500.0, 'JURIDICO'),
+(3, 'FABIO', 1700.0, 'TI'),
+(4, 'JOSE', 1800.0, 'MARKETING'),
+(5, 'ISABELE', 2200.0, 'JURIDICO')
+;
+INSERT INTO funcoes.produtos (id, nome, valor, tipo) VALUES
+(1, 'TV', 3500.00, 'Eletronicos'),
+(2, 'Geladeira', 999.99, 'Cozinha'),
+(3, 'Fogao', 699.99, 'Cozinha'),
+(4, 'Sofa', 2000.10, 'Moveis'),
+(5, 'Mesa', 700.00, 'Moveis'),
+(6, 'Cama', 1599.99, 'Moveis'),
+(7, 'Armario', 800.00, 'Moveis'),
+(8, 'Cadeiras', 300.00, 'Moveis'),
+(9, 'TV', 8000.00, 'Eletronicos')
 ;
 INSERT INTO hospital.medico (id, nome, endereco, telefone, crm) VALUES
 (1, 'NILZA EMILIA SEABRA OLIVEIRA', 'TRAVESSA BARAO DO TRIUNFO 3260 - CLINICA PARICUIA', '32424829', '4773 - PA'),
@@ -591,4 +814,29 @@ INSERT INTO joins.funcionarios (id, nome, telefone, endereco, bairro, cep, salar
 (16, 'Matheus Carmo', '87893234', 'Cidade Nova IV, 3456', 'São Bras', '66060281', 1689.9, 'Ananindeua', 4),
 (17, 'Daniel Dantes', '22989988', 'Av. Magalhães Barata, 1360', 'Nazaré', '66055090', 2800.12, 'Belem', 3),
 (18, 'Zumira Castro', '99989988', 'Boaventura da Silva, 678, ap 304', 'Umarizal', '66075080', 8080.0, 'BELEM', 4)
+;
+INSERT INTO subquery.cargos (id, descricao, nivel) VALUES
+(1, 'Analista Junior', 1),
+(2, 'Analista Junior', 2),
+(3, 'Analista Junior', 3),
+(4, 'Analista Pleno', 1),
+(5, 'Analista Pleno', 2),
+(6, 'Analista Pleno', 3),
+(7, 'Analista Senior', 1),
+(8, 'Analista Senior', 2),
+(9, 'Analista Senior', 3),
+(10, 'DBA', 1),
+(11, 'DBA', 2),
+(12, 'DBA', 3),
+(13, 'secretaria', 1)
+;
+INSERT INTO subquery.departamentos (id, nome) VALUES
+(1, 'administrativo'),
+(2, 'ti')
+;
+INSERT INTO subquery.funcionarios (id, nome, salario, cargo_id, departamento_id) VALUES
+(1, 'Maria Silva', 800.00, 13, 1),
+(2, 'Mario Carvalho', 3000.00, 2, 2),
+(3, 'Felipe Fernandes', 12000.00, 11, 2),
+(4, 'Vitor Cunha', 8000.00, 9, 2)
 ;
