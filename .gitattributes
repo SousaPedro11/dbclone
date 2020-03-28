@@ -26,4 +26,4 @@
 *.jar           binary
 *.so            binary
 *.war           binary
-*.sql           binary
+*.sql           text
