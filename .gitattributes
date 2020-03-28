@@ -5,4 +5,4 @@
 *.html   text
 *.css    text
 *.js     text
-*.sql    text
+/*.sql export-ignore
