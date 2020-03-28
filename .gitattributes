@@ -6,8 +6,8 @@
 # These files are text and should be normalized (Convert crlf => lf)
 *.css           text diff=css
 *.df            text
-*.htm           text diff=html
-*.html          text diff=html
+*.htm           text diff=astextplain
+*.html          text diff=astextplain
 *.js            text
 *.jsp           text
 *.jspf          text
