@@ -2,7 +2,7 @@
 *        text=auto
 
 *.java   text diff=java
-*.html   text diff=html
+*.html   text
 *.css    text
 *.js     text
 *.sql    text
