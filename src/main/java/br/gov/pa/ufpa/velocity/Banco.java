@@ -12,7 +12,7 @@ import org.apache.velocity.app.VelocityEngine;
 
 public class Banco {
 
-    private static Connection conexao = SingletonConexao.getConexao();
+//    private static Connection conexao = SingletonConexao.getConexao();
 
     public static void velocityGerador() throws IOException {
 
